@@ -1,0 +1,1469 @@
+Sección 1: Introducción al curso
+7. Snippets VSC PHP
+
+- Para crear snippets HTML en VSCode
+
+7.1. Desde el nav superior vvv
+File > Preferences > Configure User Snippets > buscar "html" en el browser
+
+7.2. Se abre el archivo html.json
+Se trata de un json de configuracion donde agregamos los snippets que necesitemos
+
+*** snippets sugerencia el profesor (/carpeta-local/0.snippets.txt)
+
+snippets personales vvv 
+
+- html.json vvv
+"imagenes": {
+    "prefix": "im",
+    "body" : [
+        "<picture>",
+            "\t<source srcset=\"$1.avif\" type=\"image/avif\">",
+            "\t<source srcset=\"$2.webp\" type=\"image/webp\">",
+            "\t<img loading=\"lazy\" width=\"200\" height=\"300\" src=\"$3\" alt=\"$4\">",
+        "</picture>"
+    ]
+},
+"php": {
+    "prefix": "php",
+    "body": [
+        "<?php $1 ?>"
+    ],
+    "description": "php tag"
+},
+"echo": {
+    "prefix": "echo",
+    "body": [
+        "<?php echo $1; ?>"
+    ]
+},
+"each": {
+    "prefix": "each",
+    "body": [
+        "<?php foreach($$iterable as $$key => $$value): ?>",
+        "<?php endforeach ?>"
+    ]
+},
+"if": {
+    "prefix": "if",
+    "body": [
+        "<?php if($$validation): ?>",
+        "<?php endif ?>"
+    ]
+},
+"ife": {
+    "prefix": "ife",
+    "body": [
+        "<?php if($$validation): ?>",
+        "<?php else: ?>",
+        "<?php endif ?>"
+    ]
+},
+"ifeie": {
+    "prefix": "ifeie",
+    "body": [
+        "<?php if($$validation): ?>",
+        "<?php elseif($$validation): ?>",
+        "<?php endif ?>"
+    ]
+}
+
+-php.json vvv 
+"comentario": {
+    "prefix": "comentario",
+    "body": [
+        "/**",
+        " * ${1:Descripción de la función}.",
+        " *",
+        " * @param ${2:type} ${3:nombre} ${4:Descripción del parámetro}.",
+        " * @return ${5:type} ${6:Descripción del valor de retorno}.",
+        "*/"
+    ],
+    "description": "Genera un bloque de comentarios para una función PHP."
+}
+
+---------- 
+
+Sección 1: Introducción al curso
+8. Sobre CodeIgniter 4
+
+Documentacion oficial:
+
+https://www.codeigniter.com/
+https://codeigniter4.github.io/userguide/intro/index.html
+
+---------- 
+
+Sección 1: Introducción al curso
+9. ¿Necesitas dar los primeros pasos en las principales tecnologías del desarrollo?
+
+Enlace al curso (PAGO) del profesor
+
+https://www.desarrollolibre.net/blog/javascript/curso-introduccion-a-las-principales-tecnologias-de-desarrollo-web
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+11. Software necesario e instalación de las herramientas: Windows 
+
+- Ecosistema recomendado para Windows: Laragon
+*** Laragon es una herramienta que nos provee de un monton de herramientas 
+*** Aqui tienes PHP, Apache, MySQL, PostgreSQL, Python, Node, Composer y un monton de cosas mas, que son empleadas para los desarrollos modernos
+
+*** Instalé Laragon el Sábado 23/3/2024 siguiendo un tutorial de YT subido hacía 3 meses (aprox 12/2023):
+*** Enlace: https://www.youtube.com/watch?v=0HHD-afDiI8
+*** Canal: Oregoc
+
+- ¿Por que instalamos Laragon?
+*** Instalamos Laragon en nuestro SO porque para programar en PHP necesitamos un servidor web.
+*** Para construir o para instalar un servidor web en nuestra PC necesitamos instalados el servidor Apache, el lenguaje PHP y MySQL 
+*** Laragon incluye estos 3 componentes. 
+
+- Sitio para la descarga: 
+*** https://laragon.org/index.html
+
+- Paso a paso instalacion de Laragon:
+1. Descargamos el instalador de Laragon 
+*** https://laragon.org/download/ | Nav Superior > Download > click en "Download Laragon - Full (173 MB)"
+2. buscamos la descarga del ejecutable (/Descargas/laragon-wamp.exe) | click derecho en "Ejecutar como administrador" 
+3. "¿Quieres permitir que esta aplicación de un anunciante desconocido haga cambios en tu dispositivo?" | click en "Sí"
+4. Se abre el asistente de instalacion | seleccionamos el idioma (seleccioné español)
+5. El asistente nos indica donde se va a instalar el programa (Por default en "C:\laragon") | click en "Siguiente"
+6. Aparacen 3 checkboxes, mantuve activados los primeros 2 | click en "Siguiente" vvv
+
+Laragon runs extremely fast and has very low memory footprint(< 4MB)
+- Run Laragon when Windows starts (ACTIVADO)
+
+Your app will get pretty url ---> http://app.test
+- Auto virtual hosts (ACTIVADO)
+
+Quick ways to open Text Editor & Command Prompt
+- Add Notepad++ & Terminal to the Right-Click Menu (DESACTIVADO)
+
+7. Click en "Instalar"
+8. La ventana del asistente me indica que terminó la instalación incluyendo 2 checkboxes | click en "Finalizar" vvv 
+
+Haga click en Finalizar para salir del programa de instalación.
+
+- View the README file (DESACTIVADO)
+- Run Laragon (DESACTIVADO)
+
+9. Verifiqué que el programa se instaló correctamente (se creó la carpeta "laragon" con su contenido en el disco local C -> "C:\laragon")
+
+10. Vamos a mover la carpeta "laragon" al escritorio para trabajar de manera profesional
+*** desde "C:\laragon", click derecho | Enviar a | click en "Escritorio (crear acceso directo)"
+
+11. Verifico que en el escritorio tengo un acceso directo a "C:\laragon" y a su vez un acceso directo al panel de laragon
+
+12. Configuro Laragon para ejecutarlo siempre como administrador 
+*** click derecho al acceso directo en el escritorio (ícono de Laragon)
+*** click en propiedades
+*** click en Compatibilidad
+*** Activo el checkbox "Ejecutar este programa como administrador"
+*** Click en "Aplicar"
+*** Click en "Aceptar"
+
+13. Con esta configuracion, cada vez que ejecutemos o iniciemos este programa, este programa va a iniciarse como administrador 
+*** cuando un programa no se ejecuta como administrador a veces no funcionan todos los componentes correctamente
+
+14- Laragon incluye PHP, Apache, MySQL y Composer. Con estas 4 herramientas podemos llevar adelante el curso
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+12. Instalar CodeIgniter 4 con composer
+
+Documentacion instalacion via composer: 
+https://codeigniter4.github.io/userguide/installation/installing_composer.html
+
+- Desde la terminal de Laragon vvv
+
+C:\laragon\www
+λ composer create-project codeigniter4/appstarter 0_codeigniter4
+Creating a "codeigniter4/appstarter" project at "./0_codeigniter4"
+...
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+14. Ejecutar CodeIgniter en el navegador
+
+- 3 formas de ejecutar la aplicacion en mi entorno local:
+
+1) Virtual Host (laragon lo crea automaticamente)
+http://0_codeigniter4.test/
+
+2) Accediendo a la carpeta /public desde la URL 
+http://localhost/0_codeigniter4/public/
+
+3) Desde la terminal de laragon
+C:\laragon\www\0_codeigniter4
+λ php spark serve
+http://localhost:8080
+*** esta opcion lo que hace es ejecutar el archivo "spark" en la raiz del proyecto
+
+---------- 
+
+16. Línea de comandos
+
+C:\laragon\www\0_codeigniter4
+λ php spark
+
+*** info sobre los comandos disponibles de la linea de comandos spark
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+18. Habilitar el modo desarrollador
+
+- por default en desarrollo, cuando se genera algun error en nuestra app y una vista crashea, se generan archivos de logs dentro de /writable/logs y estos errores no se muestran por pantalla 
+- el nombre de los archivos es del tipo "log-2024-03-23.log"
+
+- a su vez, por default, codeigniter toma como entorno a "production", lo que apunta de alguna manera al archivo /app/Config/Boot/production.php 
+- para habilitar el modo desarrollador seteamos la siguiente variable de entorno en el .env vvv 
+CI_ENVIRONMENT = development
+con este cambio, codeigniter tomara como entorno por defecto a development, que de alguna manera apunta al archivo /app/Config/Boot/development.php
+- development.php tiene la siguiente configuracion:
+ini_set('display_errors', '1');
+
+- con esta configuracion, en desarrollo, los errores se mostraran por pantalla, siendo mas facil corregirlos (y se siguen escribiendo en los logs de errores)
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+19. Configurar la base de datos
+
+- desde el panel de laragon, el click en "btn.Base de Datos" genera una instancia de HeidiSQL en 127.0.0.1 (localhost)
+- en esta conexion creamos la DB "code_peliculas"
+- configuramos las variables de entorno correspondientes en el .env par conectarnos a esta nueva BD
+
+database.default.hostname = localhost
+database.default.database = code_peliculas
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+
+---------- 
+
+Sección 2: Básico - Primeros pasos con Codeigniter 4
+21. Introducción a las rutas: Parte 2
+
+- tipos de parametros que podemos incluir en las URL en las peticiones GET vvv 
+https://codeigniter4.github.io/userguide/incoming/routing.html#placeholders
+
+----- 
+
+- metodo presenter() del objeto $routes para crear todas las rutas necesarias para un recurso desde Routes.php (para una web) vvv
+
+$routes->presenter("recurso_web"); // Routes.php
+
+C:\laragon\www\0_codeigniter4
+λ php spark routes
++--------+-------------------------+------+-----------------------------------------+----------------+---------------+
+| Method | Route                   | Name | Handler                                 | Before Filters | After Filters |
++--------+-------------------------+------+-----------------------------------------+----------------+---------------+
+| GET    | recurso_web             | »    | \App\Controllers\Recurso_web::index     |                | toolbar       |
+| GET    | recurso_web/show/(.*)   | »    | \App\Controllers\Recurso_web::show/$1   |                | toolbar       |
+| GET    | recurso_web/new         | »    | \App\Controllers\Recurso_web::new       |                | toolbar       |
+| GET    | recurso_web/edit/(.*)   | »    | \App\Controllers\Recurso_web::edit/$1   |                | toolbar       |
+| GET    | recurso_web/remove/(.*) | »    | \App\Controllers\Recurso_web::remove/$1 |                | toolbar       |
+| GET    | recurso_web/(.*)        | »    | \App\Controllers\Recurso_web::show/$1   |                | toolbar       |
+| POST   | recurso_web/create      | »    | \App\Controllers\Recurso_web::create    |                | toolbar       |
+| POST   | recurso_web/update/(.*) | »    | \App\Controllers\Recurso_web::update/$1 |                | toolbar       |
+| POST   | recurso_web/delete/(.*) | »    | \App\Controllers\Recurso_web::delete/$1 |                | toolbar       |
+| POST   | recurso_web             | »    | \App\Controllers\Recurso_web::create    |                | toolbar       |
++--------+-------------------------+------+-----------------------------------------+----------------+---------------+
+
+----- 
+
+- metodo resource() del objeto $routes para crear todas las rutas necesarias para un recurso desde Routes.php (para una api) vvv
+
+$routes->resource("recurso_api"); // Routes.php
+
+C:\laragon\www\0_codeigniter4
+λ php spark routes
++--------+-----------------------+------+-----------------------------------------+----------------+---------------+
+| Method | Route                 | Name | Handler                                 | Before Filters | After Filters |
++--------+-----------------------+------+-----------------------------------------+----------------+---------------+
+| GET    | recurso_api           | »    | \App\Controllers\Recurso_api::index     |                | toolbar       |
+| GET    | recurso_api/new       | »    | \App\Controllers\Recurso_api::new       |                | toolbar       |
+| GET    | recurso_api/(.*)/edit | »    | \App\Controllers\Recurso_api::edit/$1   |                | toolbar       |
+| GET    | recurso_api/(.*)      | »    | \App\Controllers\Recurso_api::show/$1   |                | toolbar       |
+| POST   | recurso_api           | »    | \App\Controllers\Recurso_api::create    |                | toolbar       |
+| PATCH  | recurso_api/(.*)      | »    | \App\Controllers\Recurso_api::update/$1 |                | toolbar       |
+| PUT    | recurso_api/(.*)      | »    | \App\Controllers\Recurso_api::update/$1 |                | toolbar       |
+| DELETE | recurso_api/(.*)      | »    | \App\Controllers\Recurso_api::delete/$1 |                | toolbar       |
++--------+-----------------------+------+-----------------------------------------+----------------+---------------+
+
+---------- 
+
+Sección 3: Crear el primer CRUD: Películas 
+27. Migraciones: Crear
+
+- modifique la clase /app/Config/App.php para que la aplicacion tome el DATETIME real de mi ubicacion geografica, concretamente del atributo $appTimezone vvv 
+
+public $appTimezone = 'America/Argentina/Buenos_Aires';
+
+----- 
+
+- creé la migracion para la tabla peliculas vvv 
+
+C:\laragon\www\0_codeigniter4
+λ php spark make:migration Peliculas
+
+CodeIgniter v4.4.6 Command Line Tool - Server Time: 2024-03-23 21:10:08 UTC-03:00
+
+File created: APPPATH\Database\Migrations\2024-03-24-001008_Peliculas.php
+
+---------- 
+
+28. Migraciones: Ejecutar
+
+- corro las migraciones vvv
+
+C:\laragon\www\0_codeigniter4
+λ php spark migrate
+
+---------- 
+
+Sección 3: Crear el primer CRUD: Películas 
+30. Migraciones: Rollback
+
+- el rollback revierte la ultima migracion corrida 
+- las migraciones se identifican por el numero de lote (tabla migrations.batch)
+- esta ejecucion va a identificar el nro de batch mas alto en la tabla migrations, y va a revertir todos los cambios asociados a los registros que compartan ese nro de batch mas alto (eliminando a su vez estos registros de migrations)
+- a nivel base de datos, se eliminan los registros asociados al ultimo lote en la tabla migrations, y las modificaciones que esta ultima migracion pueda haber realizado (pro ejemplo creacion de tablas)
+- los numeros de batch no pueden ser arbitrarios: siempre que se hace un rolback, se va a buscar el nro inmediatamente anterior, y si no existe ese nro inmediatamente anterior habra conflicto.
+- TRUCO: si cuando corremos las migraciones, hay 10 archivos que crean tablas, se crearan 10 tablas, y en migrations se crearan 10 registros asociados a esas 10 tablas, todos con el mismo valor en el campo batch.
+Si lo necesitamos podemos modificar esos valores manualmente desde la DB y reorganizar los lotes como nos convenga.
+
+C:\laragon\www\0_codeigniter4
+λ php spark migrate:rollback
+
+---------- 
+
+Sección 3: Crear el primer CRUD: Películas 
+31. Modelo: Crear modelo de película
+
+- creo el modelo PeliculaModel vvv 
+
+C:\laragon\www\0_codeigniter4
+λ php spark make:model PeliculaModel
+
+---------- 
+
+Sección 3: Crear el primer CRUD: Películas 
+41. Publicar en github
+
+- sigue los pasos de siempre para hacer el push a un repo remoto del proyecto 
+
+- luego dice "vamos a crear un release" vvv 
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4
+$ git tag v0.1 -m "CRUD peliculas" + ENTER
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4
+git push --tags | "para subir las etiquetas"
+
+- luego, en el panel de la derecha del repo remoto en la web de github, en el apartado "Rreleases", vemos que se aha agregado el release (icono + "1 tags")
+- "este primer tag corresponde a la primera seccion, y aqui tenemos el codigo fuente hasta este punto"
+
+- RECORDATORIO: la carpeta vendor esta en el .gitignore 
+- Cuando se hace un clone del proyecto, para descargar la carpeta vendor debemos ejecutar el comando "composer install"
+
+---------- 
+
+Sección 4: Reto: CRUD Categorías
+43. Reto: Crear el CRUD para las categorías
+
+- creé la carpeta categorias para las vistas del recurso categoria copiando dentro todos los archivos del recurso pelicula vvv 
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4/app/Views (main)
+$ mkdir -p categoria && cp -r pelicula/* categoria/
+
+- creé el controlador para el recurso categoria vvv
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:controller Categoria
+
+---------- 
+
+Sección 5: Rutas y redirecciones 
+47. Redirecciones
+
+- en /app/Config/App.php seteo el atributo $indexPage como un string vacio para que funcione correctamente el redireccionamiento desde los controladores vvv 
+
+public string $indexPage = '';
+
+- de ser necesario, hay que modificar tambien el atributo $baseURL, para que el redireccionamiento funcione correctamente; en mi caso, al estar desarrollando con el servidor levantado con spark en el 8080, el seteo necesario es el siguiente vvv
+
+public string $baseURL = 'http://localhost:8080/';
+
+---------- 
+
+Sección 5: Rutas y redirecciones 
+53. Publicar en github
+
+1)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git add .
+
+2)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git commit -m "Seccion 5: Rutas y redirecciones"
+
+3)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push
+
+4)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag
+v.0.1
+v0.2
+
+5)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag v0.3 -m "Seccion 5: Rutas y redirecciones"
+
+6)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push --tags
+
+---------- 
+
+Sección 7: Sesión y mensajes flash 
+65. Introducción
+
+- tenemos 2 tipos de sesiones en codeigniter 
+1) sesiones o mensajes de tipo flash -> son sesiones que duran solamente una peticion HTTP, un request
+2) variables de sesion clasicas 
+- pruebas en Chrome:
+* hice pruebas, y cuando se crea una variable de sesion solo he podido destruirlas con session()->destroy() o borrando el historial de navegacion
+* probe cerrando todas las instancias de chrome volviendo a iniciar, y estas variables persistian
+- pruebas en Firefox:
+* como con $_SESSION, las variables se destruyen automaticamente cuando cierro todas las instancias del navegador
+
+---------- 
+
+Sección 7: Sesión y mensajes flash 
+68. Publicar en github
+
+1)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git add .
+
+2)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git commit -m "Seccion 7: Sesión y mensaje flash"
+
+3)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push
+
+4)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag
+v.0.1
+v0.2
+v0.3
+
+5)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag v0.4 -m "Seccion 7: Sesión y mensaje flash"
+
+6)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push --tags
+
+---------- 
+
+Sección 8: Vistas y layouts
+71. Publicar en github
+
+1)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git add .
+
+2)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git commit -m "Seccion 8: Vistas y layouts"
+
+3)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push
+
+4)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag
+v.0.1
+v0.2
+v0.3
+v0.4
+
+5)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ git tag v0.5 -m "Seccion 8: Vistas y layouts"
+
+6)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push --tags
+
+---------- 
+
+Sección 9: Formularios y validaciones
+Documentación oficial validaciones
+https://codeigniter4.github.io/userguide/libraries/validation.html
+
+73. Validaciones: Definir reglas
+
+- en /app/Config/Validation.php definimos las reglas de validacion para nuestros formularios vvv
+
+class Validation extends BaseConfig
+{
+    ...
+    public $categorias = [
+        "titulo" => "required|min_length[3]|max_length[255]"
+    ];
+    public $pelicula = [
+        "descripcion" => "required|min_length[3]|max_length[2000]",
+        "titulo" => "required|min_length[3]|max_length[255]",
+    ];
+}
+
+---------- 
+
+Sección 9: Formularios y validaciones
+74. Validaciones: Establecerlas en formularios
+
+- vimos que con $this->validator->listErrors() obtenemos el listado de erores segun las reglas de validacion definidas en Validation.php 
+- vimos que por default, cuando imprimos este listado en pantalla, tiene una estructura html y estilos css por default 
+- este codigo esta definido en el template /vendor/codeigniter4/framework/system/Validation/Views/list.php
+
+- vimos que con $this->validator->getError("titulo"); obtenemos el error de un campo del form en especifico, segun las reglas de validacion definidas en Validation.php  
+- vimos que por default, cuando imprimos este error en pantalla, tiene una estructura html y estilos css por default 
+- este codigo esta definido en el template /vendor/codeigniter4/framework/system/Validation/Views/single.php
+
+- esto lo sabemos, ya que esta defnido en en el atributo $templates de la clase Validation (Validaton.php) vvv 
+public array $templates = [
+    'list'   => 'CodeIgniter\Validation\Views\list',
+    // /vendor/codeigniter4/framework/system/Validation/Views/list.php
+
+    'single' => 'CodeIgniter\Validation\Views\single',
+    // /vendor/codeigniter4/framework/system/Validation/Views/single.php
+
+];
+
+- estos templates los podemos customizar a nuestro gusto
+
+---------- 
+
+Sección 9: Formularios y validaciones
+75. Función de old()
+
+- cuando salta algun error de validacion para lo que es un INSERT o un UPDATE, y por ende se hace un return back al formulario, esta es la forma para que persista lo que escribio el usuario en los distintos inputs, para que no se pierda la informacion cargada y pueda corregir vvv 
+
+* en el return back del controlador ejecutamos withInput() vvv
+return redirect()->back()->withInput();
+
+* en los inputs del form usamos la funcion old(), a la que le pasamos 2 argumentos: el name del mismo input, con lo cual si el usuario escribio algo antes del submit, esto se cargara en el value, y si no escribio nada, el value cargara el segundo parametro que le pasemos a la funcion vvv 
+<input name="titulo" value="<?php echo old("titulo", $categoria["titulo"]); ?>">
+<input name="titulo" value="<?php echo old("titulo", ""); ?>">
+
+- esta combinacion de withInput() y old() es una mensaje flash
+
+---------- 
+
+Sección 9: Formularios y validaciones
+76. Publicar en github
+
+1)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git add .
+
+2)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git commit -m "Sección 9: Formularios y validaciones"
+
+3)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push
+
+4)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git tag
+v.0.1
+v0.2
+v0.3
+v0.4
+v0.5
+
+5)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git tag v0.6 -m "Sección 9: Formularios y validaciones"
+
+6)
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+git push --tags
+
+---------- 
+
+Sección 11: Filtros (Autenticación)
+84. Primeros pasos
+
+documentacion oficial filtros
+https://codeigniter.com/user_guide/incoming/filters.html
+
+- los filtros son un proceso que nos permite interceptar antes o despues de que lleguen al controlador, las peticiones HTTP
+- podemos ejececutarlos de manera global o en ciertas partes de nuestra aplicacion
+
+1) creo el filtro "MiFiltro" vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:filter
+...
+Filter class name : MiFiltro
+File created: APPPATH\Filters\MiFiltro.php
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+*** se creó el archivo /app/Filters/MiFiltro.php
+
+class MiFiltro implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if(true) {
+            return redirect()->to("/dashboard/categoria");
+        }
+    }
+}
+
+2) /app/Config/Filters.php vvv
+
+class Filters extends BaseConfig
+{
+
+    public array $aliases = [
+        'csrf'          => CSRF::class,
+        'toolbar'       => DebugToolbar::class,
+        'honeypot'      => Honeypot::class,
+        'invalidchars'  => InvalidChars::class,
+        'secureheaders' => SecureHeaders::class,
+        'mifiltro' => MiFiltro::class, // referencia a /app/Filters/MiFiltro.php
+    ];
+
+    public array $globals = [
+        'before' => [
+            
+            // 'mifiltro', 
+            // se ejecutaria para todas las peticiones a mi app, antes de llegar al controlador, MiFiltro->before()
+            
+            // 'honeypot',
+            // 'csrf',
+            // 'invalidchars',
+        ],
+        'after' => [
+            'toolbar',
+            // 'honeypot',
+            // 'secureheaders',
+        ],
+    ];
+
+    // defino que quiero que se ejecute MiFiltro->before() para las peticiones a las rutas de mi aplicacion que yo quiera (se ejecuta antes de llegar al controlador)
+    public array $filters = [
+        "mifiltro" => [
+            "before" => [
+                // "dashboard/pelicula",
+                "dashboard/pelicula/*",
+            ]
+        ]
+    ];
+
+}
+
+---------- 
+
+Sección 11: Filtros (Autenticación)
+85. Crear migración, controlador y modelo de usuario
+
+- vamos a crear un sencillo modulo de autenticacion
+- para nuestro modulo de autenticacion necesitamos crear las bases como tal: un controlador, un modelo y la migracion, del usuario
+- el modulo dautenticacion viene fuertemente ligada al usuario, a una entidad llamada usuario 
+
+- vamos a empezar a crear todos nuestros procesos vvv
+
+- creo la migracion para la tabla usuarios vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:migration Usuarios
+
+- ejecuto las migraciones (se ejecutan todas las migraciones dentro de /app/Database/Migrations) vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark migrate 
+*** se creo la tabla usuarios en la DB
+
+- creo el modelo Usuario vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:model UsuarioModel
+
+- creo el controlador para manejar todo lo relacionado a la entidad Usuario vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+php spark make:controller Web/Usuario
+
+---------- 
+
+Sección 11: Filtros (Autenticación)
+87. Login
+
+- vamos a crear completamente el modulo de login, que incluye los controladores, sus vistas y asociados y tambien las rutas vvv
+
+- /app/Views/web/usuario/login.php vvv
+<form action="<?php echo route_to("usuario.login_post"); ?>" method="POST"></form> vvv
+*** $routes->post('login_post', '\App\Controllers\Web\Usuario::login_post', ["as" => "usuario.login_post"]);
+
+*** hice pruebas, y cuando se crea una variable de sesion solo he podido destruirlas con session()->destroy() o borrando el historial de navegacion
+
+---------- 
+
+Sección 11: Filtros (Autenticación)
+90. Filtro para usuario autenticado 
+
+1) creo el filtro DashboardFilter (/app/Filters/$nuevoFiltro) vvv 
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:filter DashboardFilter 
+...
+
+2) Configuro la clase Filters para que todo funcione (/app/Config/Filters.php) vvv 
+
+2.1) modifico la propiedad $aliases (array) agregando una nueva clave que referencia el alias con el que voy a invocar a DashboardFilter en otras partes de la clase vvv
+class Filters extends BaseConfig
+{
+    public array $aliases = [
+        ...
+        'dashboardFilter' => DashboardFilter::class,
+    ];
+}
+
+2.2) 
+- modifico la propiedad $filters (array) agregando una nueva clave que invoca al alias que referencia a DashboarFilter. 
+- $filters va a ser un array en el que definimos las rutas en las cuales queremos que se ejecute la logica que vamos a definir en el metodo before() del filtro referenciado entre ña peticion realizada y previo a llegar a los correspondientes controladores
+- la logica que vamos a definir en el metodo DashboardFilter::before() vvv
+class Filters extends BaseConfig
+{
+    public array $filters = [
+        "dashboardFilter" => [
+            "before" => [
+                "dashboard",
+                "dashboard/*",
+            ]
+        ]
+    ];
+}
+
+3) configuramos el metodo before() de la clase DashboardFilter que sera el middleware (filtro) que sera lo primero que se ejecutara cuando se haga una peticion http a cualquier ruta que comienze con "/dashboard" (asi lo definimos en el paso "2.2"), y solo permitira seguir con la ejecucion a usuarios autenticados con rol de administrador vvv 
+
+class DashboardFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if(!session()->get("usuario") || session("usuario")->tipo != "admin") {
+            return redirect()->to("/login")->with("mensaje", "acceso denegado");
+        }
+    }
+}
+
+----- 
+
+Sección 12: Rest Api CRUD
+93. Primeros pasos
+
+- una REST API es una interfaz entre sistemas que usa HTTP para obtener y enviar los datos 
+- Codeigniter nos permite exponer datos en formato XML y JSON 
+- una REST API es una capa que nosotros implementamos en nuestra aplicacion con la cual podemos intecomunicar aplicaciones para consumir datos 
+- vamos a hacer una REST API tipo CRUD para que desde otra aplicacion que pueda realizar una peticion HTTP a nuestro sistema pueda consumir esos datos 
+- una REST API no viene siendo un protocolo, si no que es una serie de reglas que nosotros implementamos y la adaptamos a nuestras necesidades  
+
+- para manejar los endpoints vamos a crear controladores dentro de /app/Controllers/Api/ que van a extender de la clase ResourceController vvv
+/vendor/codeigniter4/framework/system/RESTful/ResourceController.php
+- ResourceController extiende a su vez de la clase abstracta BaseResource vvv
+/vendor/codeigniter4/framework/system/RESTful/BaseResource.php
+- ResourceController tambien hace uso del trait ResponseTrait vvv
+/vendor/codeigniter4/framework/system/API/ResponseTrait.php
+
+----- 
+
+Sección 12: Rest Api CRUD
+95. Probar CRUD con POSTMAN 
+
+- POSTMAN es una herramienta que nos permita acceder a recursos REST
+
+- Endpoints para pruebas (navegador y POSTMAN, armé este listado en el v172) vvv 
+
+* GET http://localhost:8080/api/pelicula/paginado?page=40
+/app/Controllers/Api/Pelicula.php->paginado()
+
+* GET http://localhost:8080/api/pelicula/paginado_full?buscar=a+2&etiqueta_id=36&categoria_id=7&page=12
+/app/Controllers/Api/Pelicula.php->paginado_full()
+
+* GET http://localhost:8080/api/pelicula/index_categoria_id/4?page=3
+/app/Controllers/Api/Pelicula.php->index_categoria_id()
+
+* GET http://localhost:8080/api/pelicula/index_etiqueta_id/39?page=2 
+/app/Controllers/Api/Pelicula.php->index_etiqueta_id()
+
+* GET http://localhost:8080/api/pelicula/1
+/app/Controllers/Api/Pelicula.php->show()
+
+* POST http://localhost:8080/api/pelicula/$id_pelicula/etiquetas 
+/app/Controllers/Api/Pelicula.php->etiquetas_post($pelicula_id)
+
+* DELETE http://localhost:8080/api/pelicula/(:num)/etiqueta/(:num)/delete 
+/app/Controllers/Api/Pelicula.php->etiqueta_delete($pelicula_id, $etiqueta_id)
+
+* GET http://localhost:8080/api/etiqueta/
+/app/Controllers/Api/Etiqueta.php->index()
+
+* GET http://localhost:8080/api/etiqueta/50
+/app/Controllers/Api/Etiqueta.php->show()
+
+* POST http://localhost:8080/api/etiqueta
+/app/Controllers/Api/Etiqueta.php->create()
+
+* PATCH|PUT http://localhost:8080/api/etiqueta/$id_etiqueta
+/app/Controllers/Api/Etiqueta.php->update()
+
+DELETE http://localhost:8080/api/etiqueta/$id_etiqueta
+/app/Controllers/Api/Etiqueta.php->delete()
+
+----- 
+
+Sección 13: Seeders
+99. Introducción 
+
+- Los Seeders son utilizados para generar data de prueba
+
+----- 
+
+Sección 13: Seeders
+99. ¿Que és y cómo generar un seeder? 
+
+1) creo el seeder para la entidad categorias vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:seeder CategoriaSeeder
+
+2) configuro el metodo run() del seeder creado para generar un nuevo INSERT en categorias
+
+3) ejecuto el seeder del seeder para que se haga el INSERT en categorias vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark db:seed CategoriaSeeder
+
+----- 
+
+Sección 13: Seeders
+102. Seeders anidados 
+
+- conviene manejar los seeders con uno principal, que en su metodo run() invoque a todos los demas, y llamandolos en orden tal que no genere conflictos con la data.
+- luego, solo deberemos ejecuar el Seeder princpal y se poblaran de todas las tablas asociadas a los seeders que invoquemos desde el seeder principal (ver el fichero "MainSeeder.php")
+
+----- 
+
+Sección 14: Relaciones
+105. Relaciones uno a muchos: Migración
+
+- creamos una migracion para agregar el campo "categoria" a la tabla "peliculas" y definirla como FK vvv 
+
+1) creo la migracion vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:migration AgregarCampoCategoriaATablaPelicula
+
+2) configuro la migracion (ver /app/Database/Migrations/2024-04-08-230528_AgregarCampoCategoriaATablaPelicula.php) 
+*** en el punto 5 hago un rollback de esta migracion, asi que le cambie el nombre y la reubique para que quede de ejemplo (ver informacion en el punto 5 unos renglones abajo)
+
+3) corro las migraciones vvv 
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark migrate
+
+4) la columna se ha creado correctamente vvv 
+
+- nueva estructura de la tabla peliculas vvv
+USE code_peliculas;
+SHOW CREATE TABLE peliculas;
+
+CREATE TABLE `peliculas` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descripcion` text,
+  `categoria_id` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `products_categoria_id_foreign` (`categoria_id`),
+  CONSTRAINT `products_categoria_id_foreign` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3
+
+----- 
+
+5) esta es una forma de hacerlo, pero por una cuestion de orden hago un rollback para deshacer este ultimo cambio, saco la migracion de /Migrations (la dejo como ejemplo dentro de /Database con el nombre de "migracion_ejemplo_video_105.php") vvv 
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark migrate:rollback
+... 
+
+- desde Heidi compruebo que se borro el ultimo registro de la tabla migrations (correspondiente a la migracion que acabo de revertir) y que se borro la columna categoria_id de peliculas
+
+6) ahora reconfiguro la migracion original de peliculas, para generar esta nueva columna 
+
+7) tiro 2 rollbacks mas (ya que la de peliculas es la primera de todas, entonceso para poder volver a correrla tengo que revertir los 2 rollbacks posteriores: el de usuarios y el de categorias)
+*** cada rollback elimina los registros de la tabla migrations que tengan el batch mas alto 
+*** el batch es el numero de lote de una migracion
+*** ahora, cuando revirtamos todas las migraciones, para luego correr de nuevo las migraciones, se van a ejecutar las de peliculas, categorias y usuarios 
+*** entonces vamos a comprobar que migrations va a quedar con 3 registros, y las 3 3 con el mismo nro de lote (mismo valor en el campo batch)
+
+8) con la base reseteada (ya que si hay migraciones que crearon tablas, el rollback de estas elimina las tablas), volvi a correr las migraciones y rompio porque la migracion de peliculas se ejcutaba antes que la de categorias 
+- el problema es que en la migracion de peliculas defini la relacion con categorias, y no se puede crear una relacion co una tabla que no existe 
+
+9) para solucionarlo modifique el nombre de la migracion de categorias, de manera que quede ubicada antes que la migracion de peliculas, y por ende se cree primero la tabla de categorias 
+
+10) volvi a correr las migraciones y todo funciono correctamente
+
+----- 
+
+Sección 14: Relaciones
+106. Relaciones uno a muchos: Aplicar cambios
+
+1) corro el CategoriaSeeder para poblar con datos fake la tabla categorias vvv
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark db:seed CategoriaSeeder
+
+2) hacia el final de la clase corro MainSeeder, que ejecuta CategoriaSeeder y PeliculaSeeder, que resetean las tablas categorias y peliculas, repoblandolas con 10 y 50 registros fake respectivamente, y asignando a cada pelicula una FK categoria_id
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark db:seed MainSeeder 
+
+----- 
+
+Sección 15: Carga de archivos
+119. Carga de archivos, parte 1 
+
+- en Codeigniter 4 solo existe una carpeta escribible -> /writable 
+- es decir que solo podemos subir archivos a /writable 
+
+- para acceder a recursos como imagenes y otros tipos de archivos desde el navegador, estos deben estar ubicados en /public 
+
+- en el controlador Peliculas creamos el metodo privado asignar_imagen(), que vamos a usar para gestionar imagenes 
+- se trata de un metodo que (al menos en este video) va a ser invocado por el metodo update(), es decir, el metodo que procesa la edicion de una pelicula 
+- este metodo valida que en caso de que el usuario cargue una imagen, que esta cumpla con lo que esperamos (tipo, tamaño, etc, todo definido en /app/Config/Validation::$imagenes)
+- superada la validacion, guarda fisicamente la imagen en /writable/uploads/peliculas 
+- luego de esta accion realiza las acciones correspondientes en la DB para asociar la imagen cargada a la pelicula vvv 
+* INSERT INTO imagenes 
+* INSERT INTO pelicula_imagen
+
+----- 
+
+Sección 15: Carga de archivos
+120. Carga de archivos, parte 2 
+
+- modificamos el metodo asignar_imagen() del controlador Pelicula para que las imagenes se guarden dentro de /public y puedan ser consumidas por el navegador 
+- path a las imagenes vvv 
+http://localhost:8080/uploads/peliculas/1713320426_49ecd23ec5f3bb440e9a.jpg
+
+----- 
+
+Sección 15: Carga de archivos
+121. Funciones importantes en la carga de los archivos
+
+- /app/Controllers/Dashboard/Pelicula.php::asignar_imagen() vvv
+ddl($image_file->getName(), 2); // nombre original del archivo cargado en el input:file
+
+----- 
+
+Sección 15: Carga de archivos
+122. Acceder a la imagen mediante un controlador 
+
+- la idea es acceder desde el navegador a un recurso en /writable (en este caso una imagen), directorio al que el navegador por defecto no tiene acceso vvv
+
+1) creamos una ruta GET para hacer pruebas (Routes.php) vvv 
+$routes->get("image/(:any)", "Dashboard\Pelicula::image/$1", ["as" => "get_image"]);
+// http://localhost:8080/image/1713320426_49ecd23ec5f3bb440e9a.jpg
+
+2) creamos el controlador Pelicula::image() y lo configuramos para gestionar la peticion a la ruta del punto 1), que finalmente renderizara la imagen dentro de /writable
+
+*** acceder a un recurso desde el navegador de esta fforma representa un proceso mas pesado que acceder a los recursos alojandolos en /public
+
+----- 
+
+Sección 16: Librerías y funciones en Codeigniter
+129. Librerías y funciones de ayuda 
+
+- documentacion oficial LIBRERIAS Codeigniter
+https://codeigniter4.github.io/userguide/libraries/index.html
+
+- documentacion oficial HELPERS Codeigniter
+https://codeigniter4.github.io/userguide/helpers/index.html
+
+- en /app/Controllers/BaseController.php, en el metodo initController() puedo cargar cualquier helper, modelo, etc, y estaran disponibles para cualquier controlador que herede de la clase abstracta BaseController (en este punto, todos los controladores de /app/Controllers/Dashboard/) vvv 
+
+abstract class BaseController extends Controller
+{
+    ...
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        ...
+        helper(["globals", "cookie", "date"]);
+        // "globals" es referencia a /app/Helpers/globals_helper.php (helper creado por mi)
+        ...
+    }
+    ...
+}
+
+- DATO DE COLOR: en el minuto 10' el profesor hace un echo de now() (metodo del helper "date", el cual retorna la fecha y hora actual en formato UNIX), es decir, el momento exacto en el que estaba grabando esta parte del video, y el resultado es vvv 
+- UNIX profesor = 1674297182 vvv
+$timestamp = "1674297182"; 
+$fecha_hora = date('Y-m-d H:i:s', $timestamp);
+ddl($fecha_hora, 1); // 2023-01-21 07:33:02 (7:33 AM del 21/1/2023 hora Argentina)
+
+- 3 formas de importar helpers, librerias, modelos, etc 
+* a nivel metodo de controlador (importacion en el mismo metodo) 
+* a nivel controlador (importacion en el constructor del controlador)
+* a nivel global para todos los controladores que hereden de una misma clase padre (importacion en el constructor de la clase padre)
+
+
+----- 
+
+Sección 16: Librerías y funciones en Codeigniter
+130. Implementar paginación
+
+- Forma de obtener la consulta SQL pura de una consulta contruida con el QueryBuilder de Codeigniter vvv 
+
+* Controlador Pelicula->index() vvv
+
+$peliculas = $peliculaModel->select("peliculas.*, c.titulo as categoria")
+                        ->join("categorias c", "c.id = peliculas.categoria_id")
+                        ->orderBy("peliculas.id")
+                        ->paginate(5);
+
+echo $peliculaModel->getLastQuery();
+
+----- 
+
+Sección 16: Librerías y funciones en Codeigniter
+132. Manejo de errores
+
+/vendor/codeigniter4/framework/system/Exceptions/PageNotFoundException.php
+
+- en v122 vimos un primer ejemplo de manejo de excepciones vvv 
+* controlador Pelicula->image() vvv
+if(!file_exists($name)) {
+    throw PageNotFoundException::forPageNotFound();
+}
+
+- en este ejemplo, forPageNotFound() es un metodo de la clase PageNotFoundException 
+- el path completo de esta vlase es vvv
+/vendor/codeigniter4/framework/system/Exceptions/PageNotFoundException.php
+
+- dentro de esta clase estan contenidas todos los tipo de excepciones que ofrece Codeigniter (cada tipo de excepcion es un metodo de la clase)
+- podemos crear nuevas excepciones dentro de esta clase para utilizar en distintas partes de la aplicacion 
+
+----- 
+
+Sección 17: Bootsrap 5
+135. Sobre Bootstrap 5
+
+- "Tailwind esta mas orientado a trabajar con Node"
+
+----- 
+
+- INSTALACION MANUAL DE BOOTSTRAP 5.3.3 EN EL PROYECTO (21/4/24) 
+- modulo "download" en sitio de Bootsrap -> https://getbootstrap.com/docs/5.3/getting-started/download/ 
+
+1) dentro del modulo "download", en el apartado "Source files", click en "btn.Download"
+2) esto descarga un comprimido, que descomprimido nos proporciona la carpeta "bootsrap-5.3.3"
+3) en el proyecto, incluimos esta carpeta dentro de /public 
+4) renombro la carpeta como "bootsrap"
+5) los dos archivos que importan son vvv 
+* /public/bootstrap/dist/css/bootstrap.min.css
+* /public/bootstrap/dist/js/bootstrap.min.js
+6) importamos el CSS en el layout del modulo dashboard (/app/Views/Layouts/dashboard.php) vvv 
+    <head>
+        ...
+        <link rel="stylesheet" href="<?php echo base_url() ?>bootstrap/dist/css/bootstrap.min.css">
+        ...
+    </head>
+
+    PRUEBAS vvv
+    echo base_url(); // IMPRIME "http://localhost:8080/" 
+    *** base_url() retorna el valor del atributo publico $baseURL, definido en la clase App (/app/Config/App.php)
+    echo base_url() . "bootstrap/dist/css/bootstrap.min.css"; // IMPRIME "http://localhost:8080/bootstrap/dist/css/bootstrap.min.css"
+
+----- 
+
+- INSTALACION BOOTSTRAP 5.3.3 EN EL PROYECTO VIA CLI CON COMPOSER (https://getbootstrap.com/docs/5.3/getting-started/download/) (21/4/24) 
+ 
+1) instalo Bootsrap por linea de comandos 
+cUser@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main) composer require twbs/bootstrap:5.3.3
+*** esto crea la carpeta /twbs dentro de /vendor 
+
+2) luego copie los archivos "/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" y "/vendor/twbs/bootstrap/dist/js/bootstrap.min.js", y los pegue en "/public/bootsrap/css" y "/public/bootsrap/js" respectivamente, para poder accederlos desde el navegador 
+
+3) finalmente, lo importo desde el layout del modulo dashboard (/app/Views/Layouts/dashboard.php) vvv 
+<head>
+    ...
+    <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap.min.css') ?>">
+    ...
+</head>
+
+----- 
+
+Sección 17: Bootsrap 5
+140. Paginación
+
+- Vamos a implementar las clases de Bootsrap en los bloques HTML que nos proporciona la libreria "pagination", que usamos para paginar las vistas de pelicula, categoria y etiqueta (v130) vvv 
+
+- vimos que en la vista, con este codigo se generaba una paginacion automatica, sin estilos vvv
+-- CONTROLADOR Pelicula->index()
+$peliculaModel = new PeliculaModel();
+...
+$data = [
+    ...
+    "pager" => $peliculaModel->pager, // v130
+];
+return view('dashboard/pelicula/index', $data);
+-- VISTA /app/Views/dashboard/pelicula/index.php
+<?php echo $pager->links(); ?>
+
+- resulta que el metodo links() refiere a Pager->$templates['default_full'] (/app/Config/Pager.php)
+- 'default_full' refiere al template "default_full.php" (/vendor/codeigniter4/framework/system/Pager/Views/default_full.php), el cual contiene el codigo HTML que se renderiza cuando imprimimos la ejecucion de $pager->links() 
+
+----- 
+
+IMPLEMENTACION DE ESTILOS DE BOOTSTRAP EN LOS TEMPLATES QUE NOS PROPORCIONA LA LIBRERIA PAGINATION vvv
+
+1) creamos el archivo /app/Views/partials/pagination.php
+2) en este archivo copiamos el contenido de "default_full.php" 
+3) modifico Pager->templates['default_full'] para que ahora apunte a /app/Views/partials/pagination.php y $pager->links() renderize su contenido vvv 
+public array $templates = [
+    'default_full'   => 'App\Views\partials\pagination',
+    ...
+];
+4) en el <nav> de /app/Views/partials/pagination.php aplico las clases de bootstrap que consideremos
+
+----- 
+
+Sección 18: Módulo web
+151. Filtros para el listado: Filtrar, Buscar 
+
+- opciones de Codeigniter 4 para el QueryBuilder vvv 
+https://codeigniter4.github.io/userguide/database/query_builder
+
+----- 
+
+- otro ejemplo de como ver en SQL puro una consulta armada con el QueryBuilder ORM vvv 
+
+* /app/Controllers/Blog/Pelicula VVV
+class Pelicula extends BaseController{
+    public function index()
+    {
+        $db = \Config\Database::connect();
+        $pelicula_model = $db->table("peliculas");
+        $peliculas = $pelicula_model->select("peliculas.*, C.titulo as categoria")
+            ->join("categorias C", "C.id = peliculas.categoria_id");
+        if($buscar = $this->request->getGet("buscar")){
+            $peliculas = $peliculas->like('peliculas.titulo', $buscar, 'both')
+                ->orlike('peliculas.descripcion', $buscar, 'both');
+        }    
+        $peliculas = $peliculas->orderBy("peliculas.id")->getCompiledSelect();
+        ddl($peliculas, 1);   
+    }
+}
+
+----- 
+
+Sección 18: Módulo web
+156. Segunda forma de filtrar, agrupado
+
+- funcion when() (QueryBuilder Codeigniter)
+
+documentacion -> https://codeigniter4.github.io/userguide/database/query_builder.html#when
+
+----- 
+
+Sección 18: Módulo web
+160. Mostrar imagen en listado de películas
+
+- GROUP_CONCAT() -> funcion SQL
+*** Normalmente, GROUP_CONCAT() se usa junto con la cláusula GROUP BY vvv
+*** en este ejemplo, concatena como string los valores E.titulo, de todas las etiquetas asociadas a una pelicula (relacion muchos a muchos entre peliculas y etiquetas)
+
+SELECT peliculas.*, C.titulo as categoria, GROUP_CONCAT(E.titulo) as etiquetas 
+FROM peliculas 
+INNER JOIN categorias C ON C.id = peliculas.categoria_id 
+LEFT JOIN pelicula_etiqueta PE ON PE.pelicula_id = peliculas.id 
+LEFT JOIN etiquetas E ON E.id = PE.etiqueta_id 
+GROUP BY peliculas.id 
+ORDER BY peliculas.id 
+LIMIT 3
+
++----+-------------------+------------------------+---------------+--------------+--------------------------------------------------------------------+
+| id | titulo            | descripcion            | categoria_id  | categoria    | etiquetas                                                          |
++----+-------------------+------------------------+---------------+--------------+--------------------------------------------------------------------+
+| 1  | Titulo Pelicula 1 | Descripcion Pelicula 1 | 7             | Categoria 7  | Tag 22 - Categoria 5,Tag 35 - Categoria 8                          |
+| 2  | Titulo Pelicula 2 | Descripcion Pelicula 2 | 26            | Categoria 26 | Tag 14 - Categoria 26,Tag 51 - Categoria 26,Tag 114 - Categoria 26 |
+| 3  | Titulo Pelicula 3 | Descripcion Pelicula 3 | 7             | Categoria 7  | NULL                                                               |
++----+-------------------+------------------------+---------------+--------------+--------------------------------------------------------------------+
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+
+- En este modulo, entre los videos 165 y 169, creamos todas las rutas y endpoints necesarios en 
+"Routes.php" y "/app/Controllers/Api/Pelicula.php" 
+respectivamente, para generar la misma data que generamos previamente para el modulo web en 
+"/app/Controllers/Blog/Pelicula.php" 
+durante la Sección 18
+
+- la programacion de los distintos endpoints es un copy-paste con adaptaciones de la que generamos en "/app/Controllers/Blog/Pelicula.php" para proveer a las distintas vistas del modulo web 
+
+- listado de endpoints y controladores creados segun video (v165 - v169) vvv 
+
+*v165
+GET http://localhost:8080/api/pelicula/paginado?page=40
+/app/Controllers/Api/Pelicula.php->paginado()
+*** SELECT * FROM peliculas, paginando cada 10 registros
+
+*v166
+GET http://localhost:8080/api/pelicula/paginado_full?buscar=a+2&etiqueta_id=36&categoria_id=7&page=12
+/app/Controllers/Api/Pelicula.php->paginado_full()
+*** misma data que /app/Controllers/Blog/Pelicula.php->index() 
+
+*v167
+GET http://localhost:8080/api/pelicula/index_categoria_id/4?page=3
+/app/Controllers/Api/Pelicula.php->index_categoria_id()
+*** misma data que /app/Controllers/Blog/Pelicula.php->index_por_categoria() 
+
+*v168
+GET http://localhost:8080/api/pelicula/index_etiqueta_id/39?page=2 
+/app/Controllers/Api/Pelicula.php->index_etiqueta_id()
+*** misma data que /app/Controllers/Blog/Pelicula.php->index_por_etiqueta() 
+
+*v169
+GET http://localhost:8080/api/pelicula/1
+/app/Controllers/Api/Pelicula.php->show()
+*** misma data que /app/Controllers/Blog/Pelicula.php->show() 
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+170. Crear y actualizar película: Categoría
+
+- en este video modificamos los metodos create() y update() de
+/app/Controllers/Api/Pelicula.php
+para que se pueda crear o actualizar el campo "categoria_id" en peliculas respectivamente
+*** similar a los metodos create() y update() de 
+/app/Controllers/Dashboard/Pelicula.php
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+171. Crear y actualizar película: Etiqueta
+
+- en este video trabaje en el endpoint para crear la relacion entre una pelicula y una etiqueta (similar a /app/Controllers/Blog/Pelicula.php->etiquetas_post())
+POST http://localhost:8080/api/pelicula/$id_pelicula/etiquetas 
+/app/Controllers/Api/Pelicula.php->etiquetas_post($pelicula_id)
+
+- en este video trabaje en el endpoint para eliminar fisicamente la relacion entre una pelicula y una etiqueta (similar a /app/Controllers/Blog/Pelicula.php->etiqueta_delete())
+DELETE http://localhost:8080/api/pelicula/(:num)/etiqueta/(:num)/delete 
+/app/Controllers/Api/Pelicula.php->etiqueta_delete($pelicula_id, $etiqueta_id)
+
+- forma de validar si la consulta afecto algun registro (codigo extraido de /app/Controllers/Api/Pelicula.php->etiqueta_delete()) vvv
+$pelicula_etiqueta_model = new PeliculaEtiquetaModel;
+$pelicula_etiqueta_model
+    ->where("pelicula_id", $pelicula_id)
+    ->where("etiqueta_id", $etiqueta_id)
+    ->delete();
+if($pelicula_etiqueta_model->affectedRows()) {
+    ...
+}
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+172. CRUD etiquetas
+
+- cree el recurso "etiqueta" para el CRUD de etiquetas desde la API (Routes.php) vvv 
+$routes->group("api", ["namespace" => "App\Controllers\Api"], function($routes){
+    ...
+    $routes->resource("etiqueta");
+    ...
+});
+- cree el controlador de la API /app/Controllers/Api/Etiqueta.php
+- programe los 5 metodos para el CRUD de la tabla etiquetas: index(), show(), create(), update() y delete() 
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+173. Upload
+
+- creamos un endpoint para poder subir imagenes al servidor con la edicion de una pelicula y que a su vez cree la relacion entre lapeliucla y la imagen (INSERT en imagenes y en pelicula_imagen)
+- para esto, en el controlador /app/Controllers/Api/Pelicula.php, creamos el metodo upload() 
+- la logica de este metodo es muy similar a la de /app/Controllers/Dashboard/Pelicula.php->asignar_imagen() 
+
+- creo la ruta (endpoint) vvv
+$routes->group("api", ["namespace" => "App\Controllers\Api"], function($routes){
+    ...
+    $routes->post("pelicula/(:num)/imagen/upload", "Pelicula::upload/$1");
+    ...
+});
+
+- cree el metodo /app/Controllers/Api/Pelicula->upload($pelicula_id)
+
+----- 
+
+seccion 19: Rest api relaciones métodos personalizados
+174. Upload: Eliminar imágenes
+
+- creamos un endpoint para poder eliminar la relacion entre una pelicula y una imagen, y a su vez, si la imagen no tiene ninguna relacion con ninguna pelicula, se borra del servidor
+- para esto, en el controlador /app/Controllers/Api/Pelicula.php, creamos el metodo borrar_imagen() 
+- la logica de este metodo es muy similar a la de /app/Controllers/Dashboard/Pelicula.php->borrar_imagen126() 
+
+- creo la ruta (endpoint) vvv
+$routes->group("api", ["namespace" => "App\Controllers\Api"], function($routes){
+    ...
+    $routes->delete("pelicula/(:num)/imagen/(:num)", "Pelicula::borrar_imagen/$1/$2");
+    ...
+});
+
+- cree el metodo /app/Controllers/Api/Pelicula->borrar_imagen($pelicula_id, $imagen_id)
+
+EXTRA vvv
+- forma de hacer un COUNT() desde el ORM (bloque extraido de /app/Controllers/Api/Pelicula.php->borrar_imagen()) vvv 
+if($pelicula_imagen_model->where("imagen_id", $imagen_id)->countAllResults() == 0){
+    ...
+}
+
+----- 
+
+seccion 20: Shield
+176. Instalar y configurar
+
+- documentacion Shield 
+https://codeigniter4.github.io/userguide/libraries/official_packages.html#shield
+https://shield.codeigniter.com/
+
+1. Creo el proyecto "code4authshield" desde la terminal de laragon vvv 
+C:\laragon\www
+λ composer create-project codeigniter4/appstarter code4authshield
+...
+
+2. en el nuevo proyecto, instalo Shield vvv
+composer require codeigniter4/shield
+
+3. configuramos las variables de entorno en el .env para habilitar la conexion a la BD por crear en nuestro entorno local (se llamara "1_code4authshield")
+
+4. Desde Heidi, creo la BD "1_code4authshield"
+
+5. Corremos el siguiente comando (siguiendo la documentacion) vvv 
+php spark shield:setup vvv
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/1_code4authshield
+$ php spark shield:setup
+CodeIgniter v4.5.1 Command Line Tool - Server Time: 2024-05-07 00:51:14 UTC+00:00
+  Created: APPPATH\Config/Auth.php
+  Created: APPPATH\Config/AuthGroups.php
+  Created: APPPATH\Config/AuthToken.php
+  Updated: APPPATH\Config\Autoload.php
+  Updated: APPPATH\Config\Routes.php
+  Updated: We have updated file 'APPPATH\Config\Security.php' for security reasons.
+  The required Config\Email::$fromEmail is not set. Do you set now? [y, n]: y
+  What is your email? : admin@correo.com
+  The required Config\Email::$fromName is not set. Do you set now? [y, n]: n
+  Updated: APPPATH\Config\Email.php
+  Run `spark migrate --all` now? [y, n]: y
+Running all new migrations...
+        Running: (CodeIgniter\Shield) 2020-12-28-223112_CodeIgniter\Shield\Database\Migrations\CreateAuthTables
+        Running: (CodeIgniter\Settings) 2021-07-04-041948_CodeIgniter\Settings\Database\Migrations\CreateSettingsTable
+        Running: (CodeIgniter\Settings) 2021-11-14-143905_CodeIgniter\Settings\Database\Migrations\AddContextColumn
+Migrations complete.
+
+*** documentacion -> "Run the following command. This command handles steps 1-6 of Manual Setup." 
+*** la consola nos indica las acciones que ejecuto este comando 
+*** se corrieron 3 migraciones vvv
+    /vendor/codeigniter4/shield/src/Database/Migrations/2020-12-28-223112_create_auth_tables.php
+    /vendor/codeigniter4/settings/src/Database/Migrations/2021-07-04-041948_CreateSettingsTable.php
+    /vendor/codeigniter4/settings/src/Database/Migrations/2021-11-14-143905_AddContextColumn.php
+*** en la DB recien creada "1_code4authshield" se crearon una serie de tablas (Similar a Laravel Passport) vvv 
+
+USE 1_code4authshield;
+SHOW TABLES;
+* auth_groups_users
+* auth_identities
+* auth_logins
+* auth_permissions_users
+* auth_remember_tokens
+* auth_token_logins
+* migrations
+* settings
+* users
+
+----- 
+
+seccion 20: Shield
+177. Shield: Resumen
+
+- entre otras acciones que ejecutó el comando "php spark shield:setup" en 5. del v176, creó en Routes.php el recurso "service...", el cual define una serie de rutas vvv 
+service('auth')->routes($routes); (Routes.php)
++--------+-------------------------+--------------------+--------------------------------------------------------------------+----------------+---------------+
+| Method | Route                   | Name               | Handler                                                            | Before Filters | After Filters |
++--------+-------------------------+--------------------+--------------------------------------------------------------------+----------------+---------------+
+| GET    | register                | »                  | \CodeIgniter\Shield\Controllers\RegisterController::registerView   |                |               |
+| GET    | login                   | »                  | \CodeIgniter\Shield\Controllers\LoginController::loginView         |                |               |
+| GET    | login/magic-link        | magic-link         | \CodeIgniter\Shield\Controllers\MagicLinkController::loginView     |                |               |
+| GET    | login/verify-magic-link | verify-magic-link  | \CodeIgniter\Shield\Controllers\MagicLinkController::verify        |                |               |
+| GET    | logout                  | »                  | \CodeIgniter\Shield\Controllers\LoginController::logoutAction      |                |               |
+| GET    | auth/a/show             | auth-action-show   | \CodeIgniter\Shield\Controllers\ActionController::show             |                |               |
+| POST   | register                | »                  | \CodeIgniter\Shield\Controllers\RegisterController::registerAction |                |               |
+| POST   | login                   | »                  | \CodeIgniter\Shield\Controllers\LoginController::loginAction       |                |               |
+| POST   | login/magic-link        | »                  | \CodeIgniter\Shield\Controllers\MagicLinkController::loginAction   |                |               |
+| POST   | auth/a/handle           | auth-action-handle | \CodeIgniter\Shield\Controllers\ActionController::handle           |                |               |
+| POST   | auth/a/verify           | auth-action-verify | \CodeIgniter\Shield\Controllers\ActionController::verify           |                |               |
++--------+-------------------------+--------------------+--------------------------------------------------------------------+----------------+---------------+       
+
+- ubicacion de los controladores vvv
+/vendor/codeigniter4/shield/src/Controllers/
+
+- ubicacion de las vistas vvv
+/vendor/codeigniter4/shield/src/Views/
+
+- GET "http://localhost:8080/login" renderiza automaticamente un form de login
+- GET "http://localhost:8080/register" renderiza automaticamente un form de registro
+- GET "http://localhost:8080/logout" cierra automaticamente una sesion iniciada
+
+- si estuviera usando un VirtualHost, tendria que setear el atributo $baseURL de la clase App (/app/Config/App.php) con el nombre del mismo vvv
+public string $baseURL = 'http://nombreVirtualHost.test';
+*** como yo estoy usando el servidor local de CodeIgniter dejo el atributo tal cual vvv
+public string $baseURL = 'http://localhost:8080/';
+
+1. cree un nuevo usuario desde "http://localhost:8080/index.php/register"
+Email Address   -> "admin@correo.com" (el dato se almacenó en la tabla auth_identities.secret)
+Username        -> "admin"            (el dato se almacenó en la tabla users.username)
+Password        -> "shield12345"      (el dato hasheado se almacenó en la tabla auth_identities.secret2) 
+
+2. el comando "php spark shield:setup" tambien creó 2 archivos nuevos de configuracion:
+* /app/Config/Auth.php
+    - en el atributo $views definimos que vista se va a ejecutar para cada ruta disponible (por default se encuentran en /vendor/codeigniter4/shield/src/Views/)
+    ** si queremos customizar estas vistas, no conviene modificar las vistas por default (los frameworks se actualizan y puede que estos archivos se actualizen, y al updatear el proyecto para tenerlo al dia podemos tener conflictos si les hacemos modificaciones)
+    ** la alternativa es crear archivos propios (en /app/Views/) y modificar el atributo $views segun la vista que querramos editar vvv
+    ** por ejemplo, podemos crear el archivo /app/Views/custom_login.php y que la ruta GET "http://localhost:8080/login renderize este archivo vvv
+    class Auth extends ShieldAuth
+    {
+        ...
+        public array $views = [
+            'login' => 'custom_login.php',
+        ];
+        ...
+    }
+    - en el atributo $redirects definimos las redirecciones de la ejecucion exitosa de las peticiones a las rutas disponibles ("/login", "/register", "/logout", etc) 
+    - el metodo loginRedirect() se ejecuta como middleware de la peticion a /login (podemos implementar codigo aca)
+    - el metodo registerRedirect() se ejecuta como middleware de la peticion a /register (podemos implementar codigo aca)
+    - el metodo logoutRedirect() se ejecuta como middleware de la peticion a /logout (podemos implementar codigo aca)
+
+* /app/Config/AuthGroups.php
+
+----- 
+
+seccion 21: Shield: Grupos y Permisos
+
+...

@@ -1,0 +1,65 @@
+composer create-project codeigniter4/appstarter nombre_carpeta_raiz_proyecto
+-> para crear un nuevo proyecto en CodeIgniter4
+
+composer show codeigniter4/framework
+-> me saca por consola mucha data del framework en el que se basa el proyecto 
+-> parece que es data del composer.json y del composer.lock 
+-> entre otros datos, retorna "versions : * v4.5.1", lo que indica la version de CodeIgniter en la que se monta el proyecto
+-> este mismo dato lo encontramos en el composer.lock
+
+php spark 
+-> info sobre los comandos disponibles de la linea de comandos spark
+
+php spark list
+-> info sobre los comandos disponibles de la linea de comandos spark
+
+php spark serve 
+-> levanta un servidor de desarrollo 
+
+php spark routes 
+-> lista todas las rutas de nuestra aplicacion
+
+php spark make:migration Peliculas 
+-> crear migracion para la tabla peliculas
+
+php spark migrate
+-> este comando corre las migraciones
+
+php spark migrate:rollback
+-> revierto la ultima migracion (migrations.batch)
+
+php spark make:model PeliculaModel
+-> crear un modelo
+
+composer install 
+-> para instalar las dependencias de un proyecto Codeigniter luego de clonarlo (carpeta vendor, etc) (COMPOSER)
+
+php spark make:controller Categoria
+-> crear un controlador
+
+mkdir -p categoria && cp -r pelicula/* categoria/
+-> copiar el contenido de una carpeta en otra nueva (LINUX)
+
+php spark make:filter
+...
+Filter class name : $nombreFiltro
+-> para crear filtros (autenticacion) (video 84)
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
+$ php spark make:filter DashboardFilter
+-> una forma mas directa de curear un filtro (/app/Filters/$nuevoFiltro)
+
+php spark make:seeder CategoriaSeeder
+-> crea el seeder /app/Database/Seeds/CategoriaSeeder.php
+
+php spark db:seed CategoriaSeeder
+-> ejecuto el seeder /app/Database/Seeds/CategoriaSeeder.php (crea los registros definidos en el metodo run() del seeder)
+
+composer update
+-> actualizar la version de CodeIgniter en mi proyecto (v156)
+
+composer require codeigniter4/shield
+-> instalar Shield (Sistema de Autenticacion y Autorizacion) (v176)
+
+php spark shield:setup
+-> inicializar Shield (Sistema de Autenticacion y Autorizacion) (v176)
