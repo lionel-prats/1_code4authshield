@@ -1,4 +1,5 @@
 <?php echo $this->extend("Layouts/web"); ?>
+
 <?php echo $this->section("contenido"); ?>
     <?php foreach($usuarios as $u): ?>
         <div class="card bg-light my-4">
