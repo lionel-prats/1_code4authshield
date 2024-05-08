@@ -1,0 +1,26 @@
+/* absolute height */
+.h-20r {
+    height: 20rem;
+}
+
+/* buttons */
+.btn-indigo {
+    background-color: rgb(136, 48, 199);
+    color: #fff;
+}
+.btn-indigo:hover {
+    color: rgb(136, 48, 199);
+}
+
+/* badge */
+.text-bg-indigo {
+    color: #fff !important;
+    /* background-color: RGBA(var(--bs-secondary-rgb), var(--bs-bg-opacity, 1)) !important; */
+    background-color: rgb(136, 48, 199);
+}
+
+/* images */
+.img-size-10{
+    width: 10rem;
+    height: 10rem;
+}
