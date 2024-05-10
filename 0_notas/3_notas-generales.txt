@@ -1465,5 +1465,43 @@ Password        -> "shield12345"      (el dato hasheado se almacenó en la tabla
 ----- 
 
 seccion 21: Shield: Grupos y Permisos
+181. Sistema de permisos a usuarios: Listado de usuarios
 
-...
+- shield provee el modelo UserModel, que esta asociado a la tabla users (tambien creada por shield)
+
+- documentacion gestion de usuarios con shield vvv 
+https://shield.codeigniter.com/user_management/managing_users/
+
+- ejemplo de como instanciar el modelo para poder conectarnos a la tabla usuarios (/app/Controllers/Dashboard/Usuario.php->index()) vvv 
+
+class Usuario extends BaseController
+{
+    public function index() 
+    {
+        // 2 formas de instanciar el modelo Usuario (definido internamente por Shield) // v181
+        $user_model = auth()->getProvider();
+        // $user_model = model("UserModel");
+
+        $usuarios = $user_model->find();
+        $data = [
+            "title" => "Usuario",
+            "usuarios" => $usuarios,
+        ];
+        return view("dashboard/usuario/index", $data);
+    }
+}
+
+----- 
+
+seccion 21: Shield: Grupos y Permisos
+182. Sistema de permisos a usuarios: Detalle de usuario
+
+- documentacion gestion de permisos de usuario (JOIN con auth_groups_user) vvv
+https://shield.codeigniter.com/references/authorization/
+
+- como acceder a los grupos (?) de un usuario
+- /app/Controllers/Dashboard/Usuario.php->show() vvv 
+$user_model = model("UserModel");
+$usuario = $user_model->find($id_usuario);
+ddl($usuario->getGroups()); // array con los valores del campo group de los registros asociados al usuario en la tabla "auth_groups_user"
+ddl($usuario->getPermissions()); // array con los valores del campo permission de los registros asociados al usuario en la tabla "auth_permissions_user"

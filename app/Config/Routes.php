@@ -11,9 +11,9 @@ $routes->get('/', 'Home::index');
 // ver las rutas incluidas en este recurso en 3_notas-generales.txt, apartado "177."
 service('auth')->routes($routes); 
 
-// v181
-$routes->group("dashboard", ["namespace" => "App\Controllers\Dashboard"], function($routes){ 
-    $routes->get("usuario", "Usuario::index"); 
+$routes->group("dashboard", ["namespace" => "App\Controllers\Dashboard"], function($routes){ // v181
+    $routes->get("usuario", "Usuario::index"); // v181
+    $routes->get("usuario/(:num)", "Usuario::show/$1", ["as" => "usuario.show"]); // v182 
 });
 
 

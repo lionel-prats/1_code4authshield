@@ -8,7 +8,10 @@
             </div>
             <div class="card-body">...</div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">Grupos y permisos</a>
+                <a 
+                    class="btn btn-primary"
+                    href="<?php echo route_to("usuario.show", $u->id); ?>" 
+                >Grupos y permisos</a>
             </div>
         </div>
     <?php endforeach ?>
