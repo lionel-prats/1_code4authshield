@@ -1,25 +1,52 @@
-Documentacion oficial:
+- documentacion oficial:
 https://codeigniter4.github.io/userguide/intro/index.html
 
 --------------------
 
 12. Instalar CodeIgniter 4 con composer
-Documentacion instalacion via composer: 
+
+- documentacion instalacion via composer: 
 https://codeigniter4.github.io/userguide/installation/installing_composer.html
 
 --------------------
 
 21. Introducción a las rutas: Parte 2
+
 - tipos de parametros que podemos incluir en las URL en las peticiones GET vvv 
 https://codeigniter4.github.io/userguide/incoming/routing.html#placeholders
 
 --------------------
 
 Sección 9: Formularios y validaciones
-Documentación oficial validaciones
+
+- documentación oficial validaciones
 https://codeigniter4.github.io/userguide/libraries/validation.html
 
 --------------------
 
 Sección 11: Filtros (Autenticación)
+
+- ???
 https://codeigniter.com/user_guide/incoming/filters.html
+
+--------------------
+
+...
+
+--------------------
+
+seccion 21: Shield: Grupos y Permisos
+181. Sistema de permisos a usuarios: Listado de usuarios
+
+- SHIELD: documentacion gestion de grupos y permisos de usuario (tiene que ver con las tablas auth_groups_user y auth_permissions_user) vvv
+https://shield.codeigniter.com/references/authorization/
+
+--------------------
+
+seccion 21: Shield: Grupos y Permisos
+183. Sistema de permisos a usuarios: Listado de permisos, pruebas
+
+- manejo archivos de configuracion del framework (/app/config/*.php)
+https://codeigniter4.github.io/userguide/general/configuration.html
+
+--------------------

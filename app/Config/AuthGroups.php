@@ -61,6 +61,10 @@ class AuthGroups extends ShieldAuthGroups
             'title'       => 'Beta User',
             'description' => 'Has access to beta-level features.',
         ],
+        'juez' => [
+            'title'       => 'Juez',
+            'description' => 'Puede emitir sentencias.',
+        ],
     ];
 
     /**
@@ -79,6 +83,7 @@ class AuthGroups extends ShieldAuthGroups
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
         'beta.access'         => 'Can access beta-level features',
+        'juez.sentencia'         => 'Puede emitir sentencia de un acta',
     ];
 
     /**
@@ -112,6 +117,9 @@ class AuthGroups extends ShieldAuthGroups
         'user' => [],
         'beta' => [
             'beta.access',
+        ],
+        'juez' => [
+            'juez.sentencia',
         ],
     ];
 }

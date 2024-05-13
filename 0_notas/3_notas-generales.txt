@@ -1427,6 +1427,9 @@ service('auth')->routes($routes); (Routes.php)
 - ubicacion de las vistas vvv
 /vendor/codeigniter4/shield/src/Views/
 
+- ubicacion de los modelos vvv
+/vendor/codeigniter4/shield/src/Models/
+
 - GET "http://localhost:8080/login" renderiza automaticamente un form de login
 - GET "http://localhost:8080/register" renderiza automaticamente un form de registro
 - GET "http://localhost:8080/logout" cierra automaticamente una sesion iniciada
@@ -1443,7 +1446,7 @@ Password        -> "shield12345"      (el dato hasheado se almacenó en la tabla
 
 2. el comando "php spark shield:setup" tambien creó 2 archivos nuevos de configuracion:
 * /app/Config/Auth.php
-    - en el atributo $views definimos que vista se va a ejecutar para cada ruta disponible (por default se encuentran en /vendor/codeigniter4/shield/src/Views/)
+    - en el atributo  (array) definimos que vista se va a ejecutar para cada ruta disponible (por default se encuentran en /vendor/codeigniter4/shield/src/Views/)
     ** si queremos customizar estas vistas, no conviene modificar las vistas por default (los frameworks se actualizan y puede que estos archivos se actualizen, y al updatear el proyecto para tenerlo al dia podemos tener conflictos si les hacemos modificaciones)
     ** la alternativa es crear archivos propios (en /app/Views/) y modificar el atributo $views segun la vista que querramos editar vvv
     ** por ejemplo, podemos crear el archivo /app/Views/custom_login.php y que la ruta GET "http://localhost:8080/login renderize este archivo vvv
@@ -1455,10 +1458,10 @@ Password        -> "shield12345"      (el dato hasheado se almacenó en la tabla
         ];
         ...
     }
-    - en el atributo $redirects definimos las redirecciones de la ejecucion exitosa de las peticiones a las rutas disponibles ("/login", "/register", "/logout", etc) 
-    - el metodo loginRedirect() se ejecuta como middleware de la peticion a /login (podemos implementar codigo aca)
-    - el metodo registerRedirect() se ejecuta como middleware de la peticion a /register (podemos implementar codigo aca)
-    - el metodo logoutRedirect() se ejecuta como middleware de la peticion a /logout (podemos implementar codigo aca)
+    - en el atributo $redirects definimos las redirecciones luego de la ejecucion exitosa de las peticiones a las rutas disponibles ("/login", "/register", "/logout", etc) 
+    - el metodo loginRedirect() se ejecuta como middleware de la peticion a /login (podemos implementar codigo aca) (o sea, se ejecuta antes de la renderizacion de la vista definida en $views para /login)
+    - el metodo registerRedirect() se ejecuta como middleware de la peticion a /register (podemos implementar codigo aca) (o sea, se ejecuta antes de la renderizacion de la vista definida en $views para /login)
+    - el metodo logoutRedirect() se ejecuta como middleware de la peticion a /logout (podemos implementar codigo aca) (o sea, se ejecuta antes de la renderizacion de la vista definida en $views para /login)
 
 * /app/Config/AuthGroups.php
 
@@ -1505,3 +1508,73 @@ $user_model = model("UserModel");
 $usuario = $user_model->find($id_usuario);
 ddl($usuario->getGroups()); // array con los valores del campo group de los registros asociados al usuario en la tabla "auth_groups_user"
 ddl($usuario->getPermissions()); // array con los valores del campo permission de los registros asociados al usuario en la tabla "auth_permissions_user"
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+183. Sistema de permisos a usuarios: Listado de permisos, pruebas
+
+- ubicacion del modelo UserModel, modelo pregconfigurado por Shield vvv 
+/vendor/codeigniter4/shield/src/Models/UserModel.php
+
+----- 
+
+- archivo de configuracion /app/config/AuthGroups.php vvv 
+
+- en el atributo $permissions (array) definimos los permisos que podemos asignar a un usuario
+
+- en el atributo $groups (array) definimos los grupos en los que podemos incluir a un usuario
+
+----- 
+
+- forma de recibir la respuesta de una consulta a la DB en formato array de objetos vvv
+- /app/Controllers/Dashboard/Usuario.php vvv
+
+public function show($id_usuario) {
+    ...
+    $group_model = model("GroupModel");
+    $registros_tabla_auth_groups_users = $group_model->asObject()->find();
+    ddl($registros_tabla_auth_groups_users);
+    ...
+}
+
+----- 
+
+- con la funcion config($nombre_archivo_configuracion) podemos acceder al contenido de cualquiera de los archivos de configuracion de la aplicacion (definidos en /app/config/*.php) vvv 
+
+$config = config('Pager');
+
+documentacion -> https://codeigniter4.github.io/userguide/general/configuration.html
+
+- forma de acceder a los atributos del archivo de configuracion /app/config/AuthGroups.php desde el controlador /app/Controllers/Dashboard/Usuario->show() vvv
+
+class Usuario extends BaseController
+{
+    public function show($id_usuario) 
+    {
+        $AuthGroups_content = config("AuthGroups");
+        ddl($AuthGroups_content->groups)
+        ddl($AuthGroups_content->permissions)
+        ddl($AuthGroups_content->matrix)
+    }
+}
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+186. Demo: Conocer asignación de grupos y permisos
+
+- cree dos rutas para hacer una demo de como gestionar los grupos y permisos de un usuario vvv
+GET http://localhost:8080/dashboard/usuario/gestionar_grupos/$id_usuario
+    * /app/Controllers/Dashboard/Usuario->gestionar_grupos($id_usuario)
+GET http://localhost:8080/dashboard/usuario/gestionar_permisos/$id_usuario
+    * /app/Controllers/Dashboard/Usuario->gestionar_permisos($id_usuario)
+
+- en la vista /Views/dashboard/usuario/show.php implementamos una demo de como validar si un usuario tiene tal o cual permiso con el metodo can() (ver archivo)
+*** la vista esta asociada a la ruta GET http://localhost:8080/dashboard/usuario/$id_usuario
+*** la ruta ejecuta el controlador /app/Controllers/Dashboard/Usuario->show($id_usuario), el cual renderiza la vista
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+187. Reto: Asignar/remover permisos con un click

@@ -14,6 +14,8 @@ service('auth')->routes($routes);
 $routes->group("dashboard", ["namespace" => "App\Controllers\Dashboard"], function($routes){ // v181
     $routes->get("usuario", "Usuario::index"); // v181
     $routes->get("usuario/(:num)", "Usuario::show/$1", ["as" => "usuario.show"]); // v182 
+    $routes->get("usuario/gestionar_permisos/(:num)", "Usuario::gestionar_permisos/$1", ["as" => "usuario.gestionar_permisos"]); // v186
+    $routes->get("usuario/gestionar_grupos/(:num)", "Usuario::gestionar_grupos/$1", ["as" => "usuario.gestionar_grupos"]); // v186
 });
 
 
