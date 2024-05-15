@@ -94,16 +94,12 @@ class Usuario extends BaseController
         $permiso = $this->request->getPost("permiso");
         if($usuario->can($permiso)) {
             $usuario->removePermission($permiso);
-            $resulatdo = "se quitó el permiso";
+            echo 0;
+            // exit; // solo necesario si esta activo el toolbar CI en el navegador (v188)
         } else {
             $usuario->addPermission($permiso);
-            $resulatdo = "se agragó el permiso";
+            echo 1;
+            // exit; // solo necesario si esta activo el toolbar CI en el navegador (v188)
         }
-        echo json_encode([
-            "id_usuario" => $id_usuario,
-            "permiso" => $permiso,
-            "resultado" => $resulatdo
-        ]);
-        exit;
     }
 }

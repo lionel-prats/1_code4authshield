@@ -49,16 +49,17 @@
                             <?php $old_group = explode(".", $permission)[0] ?>
                             <h5><?php echo $old_group; ?></h5>
                         <?php endif ?>
-                        <button 
-                            class="btn-permiso btn btn-success btn-sm me-2"
-                            data-permiso="<?php echo $permission; ?>"
-                        ><?php echo $permission; ?>
-                            <!-- el metodo $usuario->can($permissions[$key]) (AuthGroups.php) valida el permiso pasado como argumento esta asociado a alguno de los grupos asociados al usuario (AuthGroups.php->$groups) (v186) -->
-                            
-                            <?php if($usuario->can($permission)): ?>
-                                <span class="text-danger fw-bold">HABILITADO</span>
-                            <?php endif ?>
-                        </button>
+                        <div class="d-flex mb-2 ms-4">
+                            <button 
+                                class="btn-permiso btn btn-success btn-sm me-2 <?php echo $usuario->can($permission) ?  "border-5 border-danger":""; ?>"
+                                data-permiso="<?php echo $permission; ?>"
+                            ><?php echo $permission; ?>
+                                <!-- el metodo $usuario->can($permissions[$key]) (AuthGroups.php) valida el permiso pasado como argumento esta asociado a alguno de los grupos asociados al usuario (AuthGroups.php->$groups) (v186) -->
+                                <span class="text-danger fw-bold">
+                                    <?php echo $usuario->can($permission)?"HABILITADO":""; ?>
+                                </span>
+                            </button>
+                        </div>
                 <?php endforeach ?>
             </div>
         </div>
@@ -74,7 +75,16 @@
                         method: "POST",
                         body: formData,
                     }) .then(res => res.json())
-                    .then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        if(res == 0) {
+                            btn.classList.remove("border-5", "border-danger");
+                            btn.querySelector("span").innerText = "";
+                        } else {
+                            btn.classList.add("border-5", "border-danger")
+                            btn.querySelector("span").innerText = "HABILITADO";
+                        }
+                    })
                 })
             })
         </script>

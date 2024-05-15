@@ -661,7 +661,7 @@ class Filters extends BaseConfig
             // 'invalidchars',
         ],
         'after' => [
-            'toolbar',
+            'toolbar', // tiene que ver con el toolbar (icono CI) del vertice inferior derecho de la pantalla del navegador
             // 'honeypot',
             // 'secureheaders',
         ],
@@ -1578,3 +1578,30 @@ GET http://localhost:8080/dashboard/usuario/gestionar_permisos/$id_usuario
 
 seccion 21: Shield: Grupos y Permisos
 187. Reto: Asignar/remover permisos con un click
+
+- FormData() -> clase que tenemos en JS para manejar la data de un formulario mediante JS vvv 
+- fragmento de la vista /Views/dashboard/usuario/show.php (http://localhost:8080/dashboard/usuario/$id_usuario) vvv
+<script>
+    let formData = new FormData();
+</script>
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+
+- deshabilitar el toolbar (icono CI) del vertice inferior derecho de la pantalla del navegador vvv 
+/app/Config/Filters.php vvv
+...
+public array $required = [
+    'before' => [
+        'forcehttps', // Force Global Secure Requests
+        'pagecache',  // Web Page Caching
+    ],
+    'after' => [
+        'pagecache',   // Web Page Caching
+        'performance', // Performance Metrics
+        // 'toolbar',     // Debug Toolbar      // comentando esta linea el toolbar desaparece (ver notas v84, aprox linea 664, donde en el proyecto anterior, anula el toolbar de otra forma)
+    ],
+];
+...
+*** deshabiitando el toolbar no necesito escribir un "exit;" en los endpoints internos que voy armando para que no rompa en el front (como por ejemplo tuve que hacer en el video pasado en el controlador /app/Controllers/Dashboard/Usuario->manejar_permisos() )
