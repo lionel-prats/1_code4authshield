@@ -49,9 +49,12 @@
                             <?php $old_group = explode(".", $permission)[0] ?>
                             <h5><?php echo $old_group; ?></h5>
                         <?php endif ?>
-                        <button class="btn btn-success btn-sm me-2">
-                            <?php echo $permission; ?>
+                        <button 
+                            class="btn-permiso btn btn-success btn-sm me-2"
+                            data-permiso="<?php echo $permission; ?>"
+                        ><?php echo $permission; ?>
                             <!-- el metodo $usuario->can($permissions[$key]) (AuthGroups.php) valida el permiso pasado como argumento esta asociado a alguno de los grupos asociados al usuario (AuthGroups.php->$groups) (v186) -->
+                            
                             <?php if($usuario->can($permission)): ?>
                                 <span class="text-danger fw-bold">HABILITADO</span>
                             <?php endif ?>
@@ -59,4 +62,20 @@
                 <?php endforeach ?>
             </div>
         </div>
+        <script>
+            document.querySelectorAll(".btn-permiso").forEach((btn) =>{
+                btn.addEventListener("click", () =>{
+
+                    // FormData() es una clase que tenemos en JS para manejar la data de un formulario mediante JS (v187)
+                    let formData = new FormData(); 
+                    formData.append("permiso", btn.getAttribute("data-permiso"));
+                    
+                    fetch("/dashboard/usuario/<?php echo $usuario->id?>/manejar-permisos", {
+                        method: "POST",
+                        body: formData,
+                    }) .then(res => res.json())
+                    .then(res => console.log(res))
+                })
+            })
+        </script>
 <?php echo $this->endSection(); ?>

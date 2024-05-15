@@ -55,7 +55,7 @@ class Usuario extends BaseController
     public function gestionar_permisos($id_usuario) {
         $user_model = model("UserModel");
 
-        $action = "agregó";
+        $action = "eliminó";
         $permission = "users.create";
         
         if($action == "agregó") {
@@ -75,8 +75,8 @@ class Usuario extends BaseController
     public function gestionar_grupos($id_usuario) {
         $user_model = model("UserModel");
 
-        $action = "agregado";
-        $group = "juez";
+        $action = "eliminado";
+        $group = "beta";
         
         if($action == "agregado") {
             $user_model->find($id_usuario)->addGroup($group);
@@ -86,4 +86,24 @@ class Usuario extends BaseController
         echo "El usuario $id_usuario ha sido $action al grupo \"$group\"";
     }
 
+    // v187
+    // POST http://localhost:8080/dashboard/usuario/$id_usuario/manejar_permisos
+    public function manejar_permisos($id_usuario) {
+        $user_model = model("UserModel");
+        $usuario = $user_model->find($id_usuario);
+        $permiso = $this->request->getPost("permiso");
+        if($usuario->can($permiso)) {
+            $usuario->removePermission($permiso);
+            $resulatdo = "se quitó el permiso";
+        } else {
+            $usuario->addPermission($permiso);
+            $resulatdo = "se agragó el permiso";
+        }
+        echo json_encode([
+            "id_usuario" => $id_usuario,
+            "permiso" => $permiso,
+            "resultado" => $resulatdo
+        ]);
+        exit;
+    }
 }
