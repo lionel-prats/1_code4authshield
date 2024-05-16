@@ -45,6 +45,7 @@ class Usuario extends BaseController
             "usuario" => $usuario,
             "groups" => $AuthGroups_content->groups,
             "permissions" => $AuthGroups_content->permissions,
+            "matrix" => $AuthGroups_content->matrix,
         ];
         return view("dashboard/usuario/show", $data);
     }
@@ -101,5 +102,28 @@ class Usuario extends BaseController
             echo 1;
             // exit; // solo necesario si esta activo el toolbar CI en el navegador (v188)
         }
+    }
+    // v189
+    // POST http://localhost:8080/dashboard/usuario/$id_usuario/manejar_grupos
+    public function manejar_grupos($id_usuario) {
+        $user_model = model("UserModel");
+        $usuario = $user_model->find($id_usuario);
+        $grupo = $this->request->getPost("grupo");
+        if($usuario->inGroup($grupo)) {
+            $usuario->removeGroup($grupo);
+            echo 0;
+        } else {
+            $usuario->addGroup($grupo);
+            echo 1;
+        }
+    }
+    // v191
+    // POST http://localhost:8080/dashboard/usuario/$id_usuario/sincronizar-permisos
+    public function sincronizar_permisos($id_usuario) {
+        $user_model = model("UserModel");
+        $usuario = $user_model->find($id_usuario);
+        $permisos = $this->request->getPost("permisos");
+        $array_permisos = explode(",", $permisos);
+        return json_encode($usuario->syncPermissions(...$array_permisos));
     }
 }

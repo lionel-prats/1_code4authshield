@@ -1588,6 +1588,7 @@ seccion 21: Shield: Grupos y Permisos
 --------------------------------------------------------------------------------
 
 seccion 21: Shield: Grupos y Permisos
+188. Terminar implementación
 
 - deshabilitar el toolbar (icono CI) del vertice inferior derecho de la pantalla del navegador vvv 
 /app/Config/Filters.php vvv
@@ -1605,3 +1606,42 @@ public array $required = [
 ];
 ...
 *** deshabiitando el toolbar no necesito escribir un "exit;" en los endpoints internos que voy armando para que no rompa en el front (como por ejemplo tuve que hacer en el video pasado en el controlador /app/Controllers/Dashboard/Usuario->manejar_permisos() )
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+191. Demo: Sincronizar
+
+1. cree la ruta POST http://localhost:8080/dashboard/usuario/$id_usuario/sincronizar-permisos (/app/Controllers/Dashboard/Usuario->sincronizar_permisos())
+2. arme un bloque HTML en /app/Views/dashboard/usuario/show.php (GET http://localhost:8080/dashboard/usuario/$id_usuario) con un checkbox por permiso definido en mi sistema (AuthGroups->permissions)
+3. en el bloque JS de esta vista, cree la funcion getCheckedValues(), que es ejecutada con el "btn.Actualizar Permisos", y que retorna un array con los check seleccionados en 2.
+4. desde el bloque JS se hace un POST a la ruta creada en 1. pasando como argumento el array de permisos seleccionados obtenidos en 3.
+5. este endpoint recibe los permisos seleccionados y en el controlador sincronizar_permisos() se ejecuta la funcion de Shield syncPermissions(), la cual hace un INSERT en auth_permissions_users asociado al usuario de cada permiso recibido y un DELETE de todos los permisos no recibidos que puedan haber asociados al usuario (si el permiso ya existia no pasa nada)
+*** en 5. utilize el desempaquetado de arrays de PHP vvv 
+    $permisos = $this->request->getPost("permisos"); // ["permiso1", "permiso2", "permiso3"]
+    $array_permisos = explode(",", $permisos);
+    $usuario->syncPermissions(...$array_permisos)
+*** que es equivalente a $usuario->syncPermissions("permiso1", "permiso2", "permiso3")
+
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+193. Proteger app: Módulo de usuario
+
+...
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+CONCLUSION 
+
+- los grupos de mi aplicacion con Shield se definen en AuthGroups->groups (AuthGroups.php)
+- los grupos que asignamos a un usuario se registran en la tabla auth_groups_users
+
+- los permisos de mi aplicacion con Shield se definen en AuthGroups->permissions (AuthGroups.php)
+- cada permiso esta asociado a un grupo 
+- los permisos que asignamos a un usuario se registran en la tabla auth_permissions_users
+- cuando asignamos un permiso particular a un usuario la idea es que sea un permiso por fuera de los que ya tengan asignados los grupos que tenga asignado ese usuario 
+
+- los permisos asignados a un grupo los definimos en AuthGroups->matrix (AuthGroups.php)

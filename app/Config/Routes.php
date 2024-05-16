@@ -17,8 +17,9 @@ $routes->group("dashboard", ["namespace" => "App\Controllers\Dashboard"], functi
     $routes->get("usuario/gestionar_permisos/(:num)", "Usuario::gestionar_permisos/$1", ["as" => "usuario.gestionar_permisos"]); // v186
     $routes->get("usuario/gestionar_grupos/(:num)", "Usuario::gestionar_grupos/$1", ["as" => "usuario.gestionar_grupos"]); // v186
     $routes->post("usuario/(:num)/manejar-permisos", "Usuario::manejar_permisos/$1", ["as" => "usuario.manejar_permisos"]); // v187
+    $routes->post("usuario/(:num)/manejar-grupos", "Usuario::manejar_grupos/$1", ["as" => "usuario.manejar_grupos"]); // v189
+    $routes->post("usuario/(:num)/sincronizar-permisos", "Usuario::sincronizar_permisos/$1", ["as" => "usuario.sincronizar_permisos"]); // v191
 });
-
 
 $routes->presenter("admin"); // v179
 $routes->presenter("other"); // v179
