@@ -17,17 +17,17 @@ seccion 16: Librerías y funciones en Codeigniter       | 30
 seccion 17: Bootsrap 5                                 | 70
 seccion 18: Módulo web                                 | 129 
 seccion 19: Rest api relaciones métodos personalizados | 31  
-seccion 20: Shield                                     | 28  | 1042 minutos | 17 horas 22 minutos
-seccion 21: seccion 21: Shield: Grupos y Permisos      | 159
+seccion 20: Shield                                     | 28  
+seccion 21: seccion 21: Shield: Grupos y Permisos      | 159 | 1201 minutos | 20 horas 01 minutos
+seccion 22: Trabajando con librerías                   | 68
 
-seccion 22: xxx                                        | 68
 seccion 23: xxx                                        | 145
 seccion 24: xxx                                        | 29
 seccion 25: xxx                                        | 170
 seccion 26: xxx                                        | 540
 seccion 27: xxx                                        | 72
 seccion 28: xxx                                        | 25
-seccion 29: xxx                                        | 77 | 2327 minutos | 38 horas 47 minutos
+seccion 29: xxx                                        | 77  | 2327 minutos | 38 horas 47 minutos
 
 CURSO ANTIGUO
 seccion 31: xxx                                        | 154
@@ -38,8 +38,8 @@ seccion 35: xxx                                        | 295
 seccion 36: xxx                                        | 76
 seccion 37: xxx                                        | 27 
 
-realizado -> 1042 minutos | 17 horas 22 minutos | (44.78%) 
-pendiente -> 1285 minutos | 21 horas 25 minutos | (55.22%)
+realizado -> 1201 minutos | 20 horas 01 minutos | (51.61%) 
+pendiente -> 1126 minutos | 18 horas 46 minutos | (48.39%)
 total     -> 2327 minutos | 38 horas 47 minutos | (100%)
 
 CANAL YOUTUBE PROFESOR vvv

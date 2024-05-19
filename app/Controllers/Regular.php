@@ -6,5 +6,5 @@ namespace App\Controllers;
 class Regular extends Base
 {
     protected $title = "Regular";
-    protected $content = "Regular";
+    protected $content = 'contenido atributo Regular->content';
 }

@@ -393,6 +393,7 @@ Sección 5: Rutas y redirecciones
 
 - en /app/Config/App.php seteo el atributo $indexPage como un string vacio para que funcione correctamente el redireccionamiento desde los controladores vvv 
 
+// public string $indexPage = 'index.php';
 public string $indexPage = '';
 
 - de ser necesario, hay que modificar tambien el atributo $baseURL, para que el redireccionamiento funcione correctamente; en mi caso, al estar desarrollando con el servidor levantado con spark en el 8080, el seteo necesario es el siguiente vvv
@@ -429,6 +430,46 @@ $ git tag v0.3 -m "Seccion 5: Rutas y redirecciones"
 6)
 User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/0_codeigniter4 (main)
 git push --tags
+
+---------- 
+
+Sección 5: Rutas y redirecciones 
+
+CONCLUSION: recopilacion de tipo de redirecciones utilizadas durante todo el proyecto "0_codeigniter4" vvv 
+
+return redirect()
+    ->back();
+
+return redirect()
+    ->back()
+    ->with("mensaje", "Película borrada exitosamente");
+
+return redirect()
+    ->back()
+    ->withInput();
+
+return redirect()
+    ->route("pelicula.test");
+
+return redirect()
+    ->to("/dashboard/categoria")
+return redirect()
+    ->to((route_to("usuario.login")));
+
+return redirect()
+    ->to("/dashboard/categoria")
+    ->with("alert-bg", "alert-success");
+
+return redirect()
+    ->to(route_to("usuario.login"))
+    ->with("mensaje", $message)
+    ->with("alert-bg", "alert-success");
+
+return redirect()
+    ->to("/dashboard/categoria")
+    ->with("mensaje", $message)
+    ->with("alert-bg", "alert-success");
+
 
 ---------- 
 
@@ -743,7 +784,7 @@ class Filters extends BaseConfig
 
 2.2) 
 - modifico la propiedad $filters (array) agregando una nueva clave que invoca al alias que referencia a DashboarFilter. 
-- $filters va a ser un array en el que definimos las rutas en las cuales queremos que se ejecute la logica que vamos a definir en el metodo before() del filtro referenciado entre ña peticion realizada y previo a llegar a los correspondientes controladores
+- $filters va a ser un array en el que definimos las rutas en las cuales queremos que se ejecute la logica que vamos a definir en el metodo before() del filtro referenciado (en este caso DashboardFilter.php) entre la peticion realizada y previo a llegar a los correspondientes controladores
 - la logica que vamos a definir en el metodo DashboardFilter::before() vvv
 class Filters extends BaseConfig
 {
@@ -764,7 +805,7 @@ class DashboardFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if(!session()->get("usuario") || session("usuario")->tipo != "admin") {
-            return redirect()->to("/login")->with("mensaje", "acceso denegado");
+            return redirect()->to("/login")->with("mensaje", "acceso denegado (desde DashboardFilter.php)");
         }
     }
 }
@@ -1618,18 +1659,96 @@ seccion 21: Shield: Grupos y Permisos
 4. desde el bloque JS se hace un POST a la ruta creada en 1. pasando como argumento el array de permisos seleccionados obtenidos en 3.
 5. este endpoint recibe los permisos seleccionados y en el controlador sincronizar_permisos() se ejecuta la funcion de Shield syncPermissions(), la cual hace un INSERT en auth_permissions_users asociado al usuario de cada permiso recibido y un DELETE de todos los permisos no recibidos que puedan haber asociados al usuario (si el permiso ya existia no pasa nada)
 *** en 5. utilize el desempaquetado de arrays de PHP vvv 
-    $permisos = $this->request->getPost("permisos"); // ["permiso1", "permiso2", "permiso3"]
-    $array_permisos = explode(",", $permisos);
-    $usuario->syncPermissions(...$array_permisos)
-*** que es equivalente a $usuario->syncPermissions("permiso1", "permiso2", "permiso3")
+    $permisos = $this->request->getPost("permisos"); // "admin.admin,users.create,users.delete"
+    $array_permisos = explode(",", $permisos); // ['admin.admin', 'users.create', 'users.delete']
+    $usuario->syncPermissions(...$array_permisos) // syncPermissions('admin.admin', 'users.create', 'users.delete')
+*** que es equivalente a $usuario->syncPermissions('admin.admin', 'users.create', 'users.delete')
 
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+192. Proteger app: Definir permisos
+
+- en este video modifica los seteos de AuthGroups.php (archivo de configuracion de Shield) vvv 
+
+1. setea el atributo $groups
+- definimos 3 grupos: superadmin, admin y user
+
+2. setea el atributo $permissions
+- definimos 2 bloques de permisos:
+    * bloque "admin" -> bloque de permisos asociados a los recursos de la app (CRUD sobre peliculas, etiquetas, categorias comentarios, posts, etc)
+    * bloque "users" -> oque de permisos asociados a los usuarios de la app (CRUD sobre los usuarios del sistema)
+
+3. setea el atributo $matrix
+- definimos los permisos para los grupos definidos en $groups
 
 --------------------------------------------------------------------------------
 
 seccion 21: Shield: Grupos y Permisos
 193. Proteger app: Módulo de usuario
 
+- vamos a proteger el modulo Usuario
+    * refiere a todas lar rutas que tienen que ver con la gestion de usuarios (CRUD de usuarios del sistema)
+    * http://localhost:8080/dashboard/usuario...
+
+
+- la funcion auth()->user() 
+    * nos permite validar si existe uusario logueado
+    * retorna el object(CodeIgniter\Shield\Entities\User) en caso de que haya uusario logueado, null en caso contrario
+
+- la funcion auth()->user()->can('users.detail') 
+    * nos permite validar si el usuario logueado cuenta con el permiso que le pasamos como argumento
+    * retorna un bool
+ 
+- terminado el video, usando las 2 funciones de arriba, protegimos las rutas vv 
+* GET  http://localhost:8080/dashboard/usuario (Usuario->index())
+* GET  http://localhost:8080/dashboard/usuario/$d_usuario_ver_detalle (Usuario->show())
+* POST http://localhost:8080/dashboard/usuario/$d_usuario_ver_detalle/manejar-permisos (Usuario->manejar_permisos())
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+194. Proteger app: Redirecciones y limitaciones en la vista
+
+- en este video implementamos redirecciones de vistas en los controladores Usuario->index() y Usuario->show() 
+- tambien, en la vista GET http://localhost:8080/dashboard/usuario/1, donde se ve el detalle de un usuario y mediante peticiones fetch podemos modificar los permisos del usuario detallado, implementamos una validacion para que solo pueda acceder a esta funcionalidad un usuario logueado con con los permisos adecuados
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+195. Proteger app: Filtro para proteger módulo de Usuarios
+
+1. creo el filtro LoggedIn (/app/Filters/LoggedIn.php) vvv 
+
+User@DESKTOP-0VF0DF8 MINGW64 /c/laragon/www/1_code4authshield (main)
+$ php spark make:filter
+... 
+Filter class name : LoggedIn
 ...
+
+2. configuro Filters.php para que el filtro LoggedIn funcione correctamete 
+    *** configuramos el llamado a $LoggedIn->before() para especificar en que rutas queremos implementar su logica antes de llegas a un controlador
+    *** si el llamado lo definieramos en $globals, el metodo $LoggedIn->before() se ejecutara con cualquier peticion a nuestras rutas antes de llegar a sus respectivos controladores
+
+3. configuro LoggedIn->before() para implementar la logica de autenticacion para todas las rutas del modulo Usuario
+
+3.1. la funcion auth()->loggedIn() retorna un bool -> true si el usuario esta auitenticado (logueado), false en caso contrario
+*** documentacion -> https://shield.codeigniter.com/references/authentication/session/?h=
+
+4. implementada esta logica de manera global para todo el modulo Usuario la podemos remover de los controladores Usuario->index() y Usuario->show() (implementaciones del v194)
+
+--------------------------------------------------------------------------------
+
+seccion 21: Shield: Grupos y Permisos
+196. Proteger: controladores de ejemplo y redirecciones
+
+- vimos ejemplos de como implementar validaciones de autenticacion y permisos en los recursos vvv 
+* http://localhost:8080/admin 
+* http://localhost:8080/other
+* http://localhost:8080/regular
+* http://localhost:8080/contacto
+
+*** la logica de validacion esta definida en el controlador "Base", del cual heredan Admin, Other y Regular, y la ruta http://localhost:8080/contacto (Other->contacto()) fueron creados en este mismo video 
 
 --------------------------------------------------------------------------------
 
@@ -1645,3 +1764,10 @@ CONCLUSION
 - cuando asignamos un permiso particular a un usuario la idea es que sea un permiso por fuera de los que ya tengan asignados los grupos que tenga asignado ese usuario 
 
 - los permisos asignados a un grupo los definimos en AuthGroups->matrix (AuthGroups.php)
+
+--------------------------------------------------------------------------------
+
+seccion 22: Trabajando con librerías 
+198. Haciendo peticiones HTTP (CURL): get y delete 
+
+...

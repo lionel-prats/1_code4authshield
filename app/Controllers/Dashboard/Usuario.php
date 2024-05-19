@@ -10,6 +10,23 @@ class Usuario extends BaseController
     // GET http://localhost:8080/dashboard/usuario
     public function index() 
     {
+        // ddl(auth()->user(), "v"); // accedemos a la data del usuario autenticado (v193)
+
+        // bloque para limitar el acceso a este controlador (v193)
+        // esta logica de autenticacion la trasladamos a LoggedIn->before() (v195)
+        /* if(!auth()->user()) {
+            // return json_encode("Acceso denegado. Debes iniciar sesión - desde Usuario->index()"); // aca iria una redireccion (v193)
+            return redirect()->route("/"); // v194 
+            // return redirect()->to("/"); // para este caso funciona igual que la redireccion de arriba (v194) 
+
+        } elseif(!auth()->user()->can('users.detail')) {
+            // return json_encode(auth()->user()->username . ", estás logueado pero no tienes permisos para acceder a este modulo - desde Usuario->index()"); // aca iria una redireccion (v193)
+            return redirect()->to("/");
+        } else {
+            echo auth()->user()->username . ", estás logueado y tienes permisos para acceder al listado de usuarios del sistema - desde Usuario->index()";
+        } */
+        // fin bloque
+
         // 2 formas de instanciar el modelo Usuario (definido internamente por Shield) // v181
         $user_model = auth()->getProvider();
         // $user_model = model("UserModel");
@@ -24,6 +41,18 @@ class Usuario extends BaseController
     // GET http://localhost:8080/dashboard/usuario/$id_usuario
     public function show($id_usuario) 
     {
+        // bloque para limitar el acceso a este controlador (v193)
+        if(!auth()->user()) {
+            // return json_encode("Acceso denegado. Debes iniciar sesión - desde Usuario->show()"); // aca iria una redireccion (v193)
+            return redirect()->route("/");
+        } elseif(!auth()->user()->can('users.detail')) {
+            // return json_encode(auth()->user()->username . ", estás logueado pero no tienes permisos para acceder a este modulo - desde Usuario->show() -"); // aca iria una redireccion (v193)
+            return redirect()->to("/");
+        } else {
+            echo auth()->user()->username . ", estás logueado y tienes permisos para acceder al detalle de un usuario - desde Usuario->show()";
+        }
+        // fin bloque
+
         // instancia de GroupModel (/vendor/codeigniter4/shield/src/Models/GroupModel.php)
         $group_model = model("GroupModel");
         // obtenemos todos los registros de auth_groups_users (por default en formato array de arrays) (v183)
@@ -88,8 +117,17 @@ class Usuario extends BaseController
     }
 
     // v187
-    // POST http://localhost:8080/dashboard/usuario/$id_usuario/manejar_permisos
+    // POST http://localhost:8080/dashboard/usuario/$id_usuario/manejar-permisos (las peticiones a este endpoint vienen desde el bloque JS de la vista show.php, en el listener por un click de los btn de la seccion "Permisos (AuthGroups->permissions)")
     public function manejar_permisos($id_usuario) {
+
+        // bloque para proteger este controlador (v193)
+        if(!auth()->user()) {
+            return json_encode("Acceso denegado. Debes iniciar sesión - desde Usuario->manejar_permisos()");
+        } elseif(!auth()->user()->can('users.*')) {
+            return json_encode(auth()->user()->username . ", solo puedes leer la info de un usuario, no manipularla - desde Usuario->manejar_permisos() -");
+        }
+        // fin bloque
+
         $user_model = model("UserModel");
         $usuario = $user_model->find($id_usuario);
         $permiso = $this->request->getPost("permiso");
@@ -106,6 +144,13 @@ class Usuario extends BaseController
     // v189
     // POST http://localhost:8080/dashboard/usuario/$id_usuario/manejar_grupos
     public function manejar_grupos($id_usuario) {
+
+        if(!auth()->user()) {
+            return json_encode("Acceso denegado. Debes iniciar sesión - desde Usuario->manejar_grupos()");
+        } elseif(!auth()->user()->can('users.*')) {
+            return json_encode("No tienes permisos para realizar esta acción - desde Usuario->manejar_grupos()");
+        }
+
         $user_model = model("UserModel");
         $usuario = $user_model->find($id_usuario);
         $grupo = $this->request->getPost("grupo");

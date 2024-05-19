@@ -2,16 +2,17 @@
 
 namespace Config;
 
-use CodeIgniter\Config\Filters as BaseFilters;
+use App\Filters\LoggedIn;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
-use CodeIgniter\Filters\DebugToolbar;
-use CodeIgniter\Filters\ForceHTTPS;
 use CodeIgniter\Filters\Honeypot;
-use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
-use CodeIgniter\Filters\PerformanceMetrics;
+use CodeIgniter\Filters\ForceHTTPS;
+use CodeIgniter\Filters\DebugToolbar;
+use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use CodeIgniter\Filters\PerformanceMetrics;
+use CodeIgniter\Config\Filters as BaseFilters;
 
 class Filters extends BaseFilters
 {
@@ -34,6 +35,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'LoggedIn' => LoggedIn::class, // v195
     ];
 
     /**
@@ -67,7 +69,7 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
-    public array $globals = [
+    public array $globals = [ // los filtros que definamos aca se ejecutaran con cualquier peticion HTTP a cualquiera de nuestras rutas (v195)
         'before' => [
             // 'honeypot',
             // 'csrf',
@@ -103,5 +105,20 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        // "LoggedIn" => [ // v195
+        //     "before" => [
+        //         "dashboard/usuario/",
+        //         "dashboard/usuario/*",
+        //     ]
+        // ],
+        "LoggedIn" => [ // v195
+            "before" => [
+                "dashboard/*",
+                // "contacto/", // v196
+                // "contacto/*", // v196
+            ],
+            "after" => [],
+        ]   
+    ];
 }

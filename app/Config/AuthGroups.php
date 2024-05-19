@@ -40,7 +40,7 @@ class AuthGroups extends ShieldAuthGroups
      *
      * @see https://codeigniter4.github.io/shield/quick_start_guide/using_authorization/#change-available-groups for more info
      */
-    public array $groups = [
+    public array $groups = [ // seteo explicado y hecho en v192
         'superadmin' => [
             'title'       => 'Super Admin',
             'description' => 'Complete control of the site.',
@@ -49,31 +49,37 @@ class AuthGroups extends ShieldAuthGroups
             'title'       => 'Admin',
             'description' => 'Day to day administrators of the site.',
         ],
-
-        // v192
-        // 'developer' => [
-        //     'title'       => 'Developer',
-        //     'description' => 'Site programmers.',
-        // ],
-        
-        
         'user' => [
             'title'       => 'User',
             'description' => 'General users of the site. Often customers.',
         ],
-        
-        // v192
-        // 'beta' => [
-        //     'title'       => 'Beta User',
-        //     'description' => 'Has access to beta-level features.',
-        // ],
-        
-        // v192
-        // 'juez' => [
-        //     'title'       => 'Juez',
-        //     'description' => 'Puede emitir sentencias.',
-        // ],
     ];
+    
+    // *** seteo default de $groups, comentado en v192
+    // public array $groups = [
+    //     'superadmin' => [
+    //         'title'       => 'Super Admin',
+    //         'description' => 'Complete control of the site.',
+    //     ],
+    //     'admin' => [
+    //         'title'       => 'Admin',
+    //         'description' => 'Day to day administrators of the site.',
+    //     ],
+    //     'developer' => [
+    //         'title'       => 'Developer',
+    //         'description' => 'Site programmers.',
+    //     ],
+        
+    //     'user' => [
+    //         'title'       => 'User',
+    //         'description' => 'General users of the site. Often customers.',
+    //     ],
+        
+    //     'beta' => [
+    //         'title'       => 'Beta User',
+    //         'description' => 'Has access to beta-level features.',
+    //     ],
+    // ];
 
     /**
      * --------------------------------------------------------------------
@@ -83,19 +89,25 @@ class AuthGroups extends ShieldAuthGroups
      *
      * If a permission is not listed here it cannot be used.
      */
-    public array $permissions = [
-        // 'admin.access'        => 'Can access the sites admin area',            // v192 
-        'admin.admin'            => 'Can access the sites admin area',            // v192 
-        // 'admin.settings'         => 'Can access the main site settings',       // v192
-        
-        // 'users.manage-admins' => 'Can manage other admins',                    // v192
+    public array $permissions = [ // seteo explicado y hecho en v192
+        'admin.admin'            => 'Can access the sites admin area',    
+
         'users.create'           => 'Can create new non-admin users',
         'users.edit'             => 'Can edit existing non-admin users',
         'users.delete'           => 'Can delete existing non-admin users',
-        'users.detail'           => 'Can list and show existing non-admin users', // v192
-        // 'beta.access'         => 'Can access beta-level features',             // v192
-        // 'juez.sentenciar'     => 'Puede emitir sentencia de un acta',          // v192
+        'users.detail'           => 'Can list and show existing non-admin users', 
     ];
+   
+    // *** seteo default de $permissions, comentado en v192
+    // public array $permissions = [
+    //     'admin.access'           => 'Can access the sites admin area',             
+    //     'admin.settings'         => 'Can access the main site settings',       
+    //     'users.manage-admins'    => 'Can manage other admins',                    
+    //     'users.create'           => 'Can create new non-admin users',
+    //     'users.edit'             => 'Can edit existing non-admin users',
+    //     'users.delete'           => 'Can delete existing non-admin users', 
+    //     'beta.access'            => 'Can access beta-level features',      
+    // ];
 
     /**
      * --------------------------------------------------------------------
@@ -105,19 +117,19 @@ class AuthGroups extends ShieldAuthGroups
      *
      * This defines group-level permissions.
      */
-    public array $matrix = [
+    public array $matrix = [ // seteo explicado y hecho en v192
         'superadmin' => [
-            'admin.*',
-            'users.*',
+            'admin.*', // acceso a todos los permisos del bloque de permisos "admin" (v192)
+            'users.*', // acceso a todos los permisos del bloque de permisos "users" (v192)
         ],
         'admin' => [
-            'admin.*',
-            'users.detail',
+            'admin.*', // acceso a todos los permisos del bloque de permisos "admin" (v192)
+            'users.detail', // acceso al permiso "detail" del bloque de permisos "users" (v192)
         ],
         'user' => [],
     ];
 
-    // matrix original comentada (v192)
+    // *** seteo default de $matrix, comentado en v192
     // public array $matrix = [
     //     'superadmin' => [
     //         'admin.*',

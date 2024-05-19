@@ -6,5 +6,7 @@ namespace App\Controllers;
 class Admin extends Base
 {
     protected $title = "Admin";
-    protected $content = "Admin";
+    protected $content = 'contenido atributo Admin->content';
+    protected $permiso = "admin.admin";
+    protected $userTieneQueEstarAuth = true;
 }
